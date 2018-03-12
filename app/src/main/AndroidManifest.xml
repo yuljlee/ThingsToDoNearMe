@@ -21,6 +21,11 @@
         <service
             android:name=".sync.SyncIntentService"
             android:exported="false"/>
+        <!-- Our ContentProvider -->
+        <provider
+            android:name=".model.EventProvider"
+            android:authorities="@string/content_authority"
+            android:exported="false"/>
     </application>
 
 </manifest>

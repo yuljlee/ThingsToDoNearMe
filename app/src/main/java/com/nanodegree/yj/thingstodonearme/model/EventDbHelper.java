@@ -30,7 +30,7 @@ public class EventDbHelper extends SQLiteOpenHelper {
                         EventContract.EventEntry.COLUMN_DESC        + " TEXT NOT NULL,"                  +
                         EventContract.EventEntry.COLUMN_SITE_URL    + " INTEGER NOT NULL, "                    +
                         EventContract.EventEntry.COLUMN_IMAGE_URL   + " TEXT NOT NULL, "                    +
-                        EventContract.EventEntry.COLUMN_TIME_START  + " TEXT NOT NULL "                    +
+                        EventContract.EventEntry.COLUMN_TIME_START  + " TEXT NOT NULL, "                    +
                         EventContract.EventEntry.COLUMN_TIME_END    + " TEXT NOT NULL "                    +
                         " );";
 

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Things To Do Near Me</string>
+    <string name="content_authority">com.nanodegree.yj.thingstodonearme</string>
 </resources>

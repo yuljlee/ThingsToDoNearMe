@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.util.Log;
 
+import com.nanodegree.yj.thingstodonearme.model.EventContract;
 import com.nanodegree.yj.thingstodonearme.utils.JsonUtils;
 import com.nanodegree.yj.thingstodonearme.utils.NetworkUtils;
 
@@ -40,22 +41,22 @@ public class SyncTask {
 
             Log.v("data:", jsonItem);
 
-            ContentValues[] movieValues = JsonUtils
-                    .getMovieContentValuesFromJson(context, jsonItem);
-//
-//            if (movieValues != null && movieValues.length != 0) {
-//
-//                ContentResolver movieContentResolver = context.getContentResolver();
-//
-////                movieContentResolver.delete(
-////                        MovieContract.MovieEntry.CONTENT_URI,
-////                        null,
-////                        null);
-////
-////                movieContentResolver.bulkInsert(
-////                        MovieContract.MovieEntry.CONTENT_URI,
-////                        movieValues);
-//            }
+            ContentValues[] eventValues = JsonUtils
+                    .getEventContentValuesFromJson(context, jsonItem);
+
+            if (eventValues != null && eventValues.length != 0) {
+
+                ContentResolver eventContentResolver = context.getContentResolver();
+
+                eventContentResolver.delete(
+                        EventContract.EventEntry.CONTENT_URI,
+                        null,
+                        null);
+
+                eventContentResolver.bulkInsert(
+                        EventContract.EventEntry.CONTENT_URI,
+                        eventValues);
+            }
 
 
         } catch (Exception e) {

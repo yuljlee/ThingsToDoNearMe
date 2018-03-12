@@ -3,6 +3,8 @@ package com.nanodegree.yj.thingstodonearme.utils;
 import android.content.ContentValues;
 import android.content.Context;
 
+import com.nanodegree.yj.thingstodonearme.model.EventContract;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,7 +16,8 @@ import org.json.JSONObject;
 public final class JsonUtils {
 
     private static final String TAG = JsonUtils.class.getSimpleName();
-    public static ContentValues[] getMovieContentValuesFromJson(Context context, String JsonStr)
+
+    public static ContentValues[] getEventContentValuesFromJson(Context context, String JsonStr)
             throws JSONException {
 
         JSONObject eventJson = new JSONObject(JsonStr);
@@ -45,17 +48,16 @@ public final class JsonUtils {
             time_end = eachMoive.getString("time_end");
 
             //movies.add(new Movie(movieTitle, posterPath, releaseDate, voteAverage, overview));
-            ContentValues movieValues = new ContentValues();
-//            movieValues.put(MovieContract.MovieEntry.COLUMN_MOVIE_ID, movieId);
-//            movieValues.put(MovieContract.MovieEntry.COLUMN_TITLE, movieTitle);
-//            movieValues.put(MovieContract.MovieEntry.COLUMN_POSTER_URL, posterPath);
-//            movieValues.put(MovieContract.MovieEntry.COLUMN_RELEASE_DATE, releaseDate);
-//            movieValues.put(MovieContract.MovieEntry.COLUMN_AVERAGE, voteAverage);
-//            movieValues.put(MovieContract.MovieEntry.COLUMN_OVERVIEW, overview);
-//            movieValues.put(MovieContract.MovieEntry.COLUMN_VIDEO_URL, "video");
-//            movieValues.put(MovieContract.MovieEntry.COLUMN_REVIEW_URL, "review");
+            ContentValues eventValues = new ContentValues();
+            eventValues.put(EventContract.EventEntry.COLUMN_ID, id);
+            eventValues.put(EventContract.EventEntry.COLUMN_NAME, name);
+            eventValues.put(EventContract.EventEntry.COLUMN_DESC, description);
+            eventValues.put(EventContract.EventEntry.COLUMN_SITE_URL, event_site_url);
+            eventValues.put(EventContract.EventEntry.COLUMN_IMAGE_URL, image_url);
+            eventValues.put(EventContract.EventEntry.COLUMN_TIME_START, time_start);
+            eventValues.put(EventContract.EventEntry.COLUMN_TIME_END, time_end);
 
-            eventContentValues[i] = movieValues;
+            eventContentValues[i] = eventValues;
         }
 
         return eventContentValues;
