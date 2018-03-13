@@ -35,9 +35,9 @@ public class SyncTask {
             //String jsonMovieResponse = NetworkUtils.fetchJsonArray();
 
             String jsonItem = NetworkUtils.fetchJsonArray();
-//            if (jsonItem == null) {
-//                throw new JSONException("Invalid parsed item array" );
-//            }
+            if (jsonItem == null) {
+                throw new JSONException("Invalid parsed item array" );
+            }
 
             Log.v("data:", jsonItem);
 

@@ -3,50 +3,76 @@ package com.nanodegree.yj.thingstodonearme.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 /**
  * Created by u2stay1915 on 3/10/18.
  */
 
 public class Event implements Parcelable {
 
-    private String id;
+    private String event_id;
     private String name;
     private String description;
     private String event_site_url;
     private String image_url;
     private String time_start;
     private String time_end;
+    private long latitude;
+    private long longitude;
+    private ArrayList<Location> location;
 
-    public Event (String id, String name, String description, String event_site_url
-            , String image_url, String time_start, String time_end) {
-        this.id = id;
+    public Event (String event_id, String name, String description, String event_site_url
+            , String image_url, String time_start, String time_end, long latitude, long longitude
+            , ArrayList<Location> location) {
+        this.event_id = event_id;
         this.name = name;
         this.description = description;
         this.event_site_url = event_site_url;
         this.image_url = image_url;
         this.time_start = time_start;
         this.time_end = time_end;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.location = location;
     }
 
     private Event (Parcel in) {
-        id = in.readString();
+        event_id = in.readString();
         name = in.readString();
         description = in.readString();
         event_site_url = in.readString();
         image_url = in.readString();
         time_start = in.readString();
         time_end = in.readString();
+        latitude = in.readLong();
+        longitude = in.readLong();
+        if (in.readByte() == 0x01) {
+            location = new ArrayList<Location>();
+            in.readList(location, com.nanodegree.yj.thingstodonearme.model.Location.class.getClassLoader());
+        } else {
+            location = null;
+        }
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
+        dest.writeString(event_id);
         dest.writeString(name);
         dest.writeString(description);
         dest.writeString(event_site_url);
         dest.writeString(image_url);
-        dest.writeString(time_start);
         dest.writeString(time_end);
+        dest.writeString(time_start);
+        dest.writeLong(latitude);
+        dest.writeLong(longitude);
+        if (location == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+
+            dest.writeByte((byte) (0x01));
+            dest.writeList(location);
+        }
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -64,8 +90,8 @@ public class Event implements Parcelable {
         return 0;
     }
 
-    public String getId() {
-        return id;
+    public String getEvent_id() {
+        return event_id;
     }
 
     public String getName() {
@@ -92,4 +118,15 @@ public class Event implements Parcelable {
         return time_end;
     }
 
+    public long getLatitude() {
+        return latitude;
+    }
+
+    public long getLongitude() {
+        return longitude;
+    }
+
+    public ArrayList<Location> getLocation() {
+        return location;
+    }
 }

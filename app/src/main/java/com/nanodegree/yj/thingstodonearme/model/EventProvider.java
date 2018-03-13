@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -46,6 +47,7 @@ public class EventProvider extends ContentProvider {
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
                         @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         Cursor cursor;
+        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
         switch (sUriMatcher.match(uri)) {
 
@@ -74,14 +76,31 @@ public class EventProvider extends ContentProvider {
             }
 
             case CODE_EVENT: {
-                cursor = mOpenHelper.getReadableDatabase().query(
-                        EventContract.EventEntry.TABLE_NAME,
+
+                //This is an left join which looks like
+                //weather LEFT JOIN location ON event.event_id = location.event_id
+                queryBuilder.setTables(EventContract.EventEntry.TABLE_NAME + " LEFT JOIN " +
+                        EventContract.LocationEntry.TABLE_NAME + " ON " +
+                        EventContract.EventEntry.TABLE_NAME + "." + EventContract.EventEntry.COLUMN_ID + " = " +
+                        EventContract.LocationEntry.TABLE_NAME + "." + EventContract.LocationEntry.COLUMN_ID);
+
+                cursor = queryBuilder.query(
+                        mOpenHelper.getReadableDatabase(),
                         projection,
                         selection,
                         selectionArgs,
                         null,
                         null,
                         sortOrder);
+
+//                cursor = mOpenHelper.getReadableDatabase().query(
+//                        EventContract.EventEntry.TABLE_NAME,
+//                        projection,
+//                        selection,
+//                        selectionArgs,
+//                        null,
+//                        null,
+//                        sortOrder);
 
                 break;
             }

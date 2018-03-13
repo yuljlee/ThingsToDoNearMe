@@ -91,6 +91,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
 
         holder.mEventTextView.setText(mCursor.getString(2)); // event name
         holder.mDateTextView.setText(mCursor.getString(6));  // event date
+        holder.mLocationTextView.setText(mCursor.getString(7)); // event location
     }
 
     @Override
