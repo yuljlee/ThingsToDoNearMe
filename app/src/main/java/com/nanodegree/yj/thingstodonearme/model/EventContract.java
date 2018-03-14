@@ -36,6 +36,7 @@ public class EventContract {
         public static final String COLUMN_TIME_END = "time_end";
         public static final String COLUMN_LATITUDE = "latitude";
         public static final String COLUMN_LONGITUDE = "longitude";
+        public static final String COLUMN_ADDRESS1 = "address1";
 
         public static Uri buildEventUriWithId(int indexId) {
             return CONTENT_URI.buildUpon()

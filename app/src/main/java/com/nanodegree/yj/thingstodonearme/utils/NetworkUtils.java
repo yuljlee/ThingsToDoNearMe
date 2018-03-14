@@ -35,6 +35,7 @@ public final class NetworkUtils {
         Uri builtUri = Uri.parse(Constant.YELP_BASE_URL).buildUpon()
                 .appendQueryParameter(Constant.YELP_CATEGORY_QUERY_PARAMETER, "kids-family")
                 .appendQueryParameter(Constant.YELP_LOCATION_QUERY_PARAMETER, "los angeles, CA")
+                //.appendQueryParameter(Constant.YELP_LOCATION_QUERY_PARAMETER, "san francisco, CA")
                 .appendQueryParameter(Constant.YELP_LIMIT_QUERY_PARAMETER, "10")
                 .appendQueryParameter(Constant.YELP_SORT_QUERY_PARAMETER, "popularity")
                 .appendQueryParameter(Constant.YELP_STARTDATE_QUERY_PARAMETER, "1520035200")
