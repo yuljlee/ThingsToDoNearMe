@@ -10,9 +10,9 @@ import android.support.annotation.NonNull;
 
 public class SyncUtils {
 
-    public static void startImmediateSync(@NonNull final Context context) {
+    public static void startImmediateSync(@NonNull final Context context, String sortBy) {
         Intent intentToSyncImmediately = new Intent(context, SyncIntentService.class);
-        //intentToSyncImmediately.putExtra("sortBy", sortBy);
+        intentToSyncImmediately.putExtra("sortBy", sortBy);
         context.startService(intentToSyncImmediately);
     }
 }

@@ -37,6 +37,14 @@ public class EventContract {
         public static final String COLUMN_LATITUDE = "latitude";
         public static final String COLUMN_LONGITUDE = "longitude";
         public static final String COLUMN_ADDRESS1 = "address1";
+        public static final String COLUMN_ADDRESS2 = "address2";
+        public static final String COLUMN_ADDRESS3 = "address3";
+        public static final String COLUMN_CITY = "city";
+        public static final String COLUMN_ZIP_CODE = "zip_code";
+        public static final String COLUMN_COUNTRY = "country";
+        public static final String COLUMN_STATE = "state";
+        public static final String COLUMN_DISPLAY_ADDRESS = "display_address";
+        public static final String COLUMN_CROSS_STREETS = "cross_streets";
 
         public static Uri buildEventUriWithId(int indexId) {
             return CONTENT_URI.buildUpon()

@@ -24,7 +24,6 @@ public final class JsonUtils {
         JSONObject eventJson = new JSONObject(JsonStr);
         JSONArray eventArray = eventJson.getJSONArray("events");
 
-        //ContentValues[] movieContentValues = new ContentValues[moiveJsonStr.length()];
         ContentValues[] eventContentValues = new ContentValues[eventArray.length()];
 
         String id;
@@ -36,8 +35,16 @@ public final class JsonUtils {
         String time_end;
         long latitude;
         long longitude;
-
-        //ArrayList<Movie> movies = new ArrayList<>();
+        JSONObject location;
+        String address1;
+        String address2;
+        String address3;
+        String city;
+        String zip_code;
+        String country;
+        String state;
+        String display_address;
+        String cross_streets;
 
         for (int i = 0; i < eventArray.length(); i++) {
             JSONObject eachMoive = eventArray.getJSONObject(i);
@@ -51,6 +58,16 @@ public final class JsonUtils {
             time_end = eachMoive.getString("time_end");
             latitude = eachMoive.getLong("latitude");
             longitude = eachMoive.getLong("longitude");
+            location = eachMoive.getJSONObject("location");
+            address1 = location.getString("address1");
+            address2 = location.getString("address2");
+            address3 = location.getString("address3");
+            city = location.getString("city");
+            zip_code = location.getString("zip_code");
+            country = location.getString("country");
+            state = location.getString("state");
+            display_address = location.getString("display_address");
+            cross_streets = location.getString("cross_streets");
 
             //movies.add(new Movie(movieTitle, posterPath, releaseDate, voteAverage, overview));
             ContentValues eventValues = new ContentValues();
@@ -63,6 +80,15 @@ public final class JsonUtils {
             eventValues.put(EventContract.EventEntry.COLUMN_TIME_END, time_end);
             eventValues.put(EventContract.EventEntry.COLUMN_LATITUDE, latitude);
             eventValues.put(EventContract.EventEntry.COLUMN_LONGITUDE, longitude);
+            eventValues.put(EventContract.EventEntry.COLUMN_ADDRESS1, address1);
+            eventValues.put(EventContract.EventEntry.COLUMN_ADDRESS2, address2);
+            eventValues.put(EventContract.EventEntry.COLUMN_ADDRESS3, address3);
+            eventValues.put(EventContract.EventEntry.COLUMN_CITY, city);
+            eventValues.put(EventContract.EventEntry.COLUMN_ZIP_CODE, zip_code);
+            eventValues.put(EventContract.EventEntry.COLUMN_COUNTRY, country);
+            eventValues.put(EventContract.EventEntry.COLUMN_STATE, state);
+            eventValues.put(EventContract.EventEntry.COLUMN_DISPLAY_ADDRESS, display_address);
+            eventValues.put(EventContract.EventEntry.COLUMN_CROSS_STREETS, cross_streets);
 
             eventContentValues[i] = eventValues;
         }

@@ -19,9 +19,9 @@ import java.util.ArrayList;
  * Created by u2stay1915 on 3/11/18.
  */
 
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapterViewHolder> {
+public class EventAdapterFrag2 extends RecyclerView.Adapter<EventAdapterFrag2.EventAdapterViewHolder> {
 
-    private static final String TAG = EventAdapter.class.getSimpleName();
+    private static final String TAG = EventAdapterFrag2.class.getSimpleName();
 
     private final Context mContext;
     private ArrayList<Event> mEventData;
@@ -35,7 +35,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
         void onClick(int eventId);
     }
 
-    public EventAdapter(Context context, EventAdapterOnClickHandler clickHandler) {
+    public EventAdapterFrag2(Context context, EventAdapterOnClickHandler clickHandler) {
         mContext = context;
         mClickHandler = clickHandler;
     }
@@ -79,7 +79,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
     }
 
     @Override
-    public void onBindViewHolder(EventAdapter.EventAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(EventAdapterFrag2.EventAdapterViewHolder holder, int position) {
         mCursor.moveToPosition(position);
 
         Log.v("position ---> ", String.valueOf(position));

@@ -3,9 +3,12 @@ package com.nanodegree.yj.thingstodonearme;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.nanodegree.yj.thingstodonearme.R;
+import com.nanodegree.yj.thingstodonearme.model.CategoryFragmentPagerAdapter;
 import com.nanodegree.yj.thingstodonearme.model.EventAdapter;
 import com.nanodegree.yj.thingstodonearme.model.EventContract;
 import com.nanodegree.yj.thingstodonearme.sync.SyncUtils;
@@ -35,43 +39,54 @@ public class MainActivity extends AppCompatActivity implements
     private EventAdapter mEventApdapter;
     private static final int EVENT_LOADER_ID = 77;
     private int mPosition = RecyclerView.NO_POSITION;
+    private FragmentPagerAdapter mFragmentPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        mFragmentPagerAdapter = new CategoryFragmentPagerAdapter(getSupportFragmentManager(), this);
+//        viewPager.setAdapter(new CategoryFragmentPagerAdapter(getSupportFragmentManager(),
+//                MainActivity.this));
+        viewPager.setAdapter((mFragmentPagerAdapter));
+
+        // Give the TabLayout the ViewPager
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
         //ButterKnife.bind(this);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
-
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setHasFixedSize(true);
-        mEventApdapter = new EventAdapter(this, this);
-        mRecyclerView.setAdapter(mEventApdapter);
-
-        LoaderManager.LoaderCallbacks<Cursor> callback = MainActivity.this;
-        //Bundle bundleForLoader = new Bundle();
-        //bundleForLoader.putString("keySortBy", mSortBy);
-        //getSupportLoaderManager().initLoader(MOVIE_LOADER_ID, bundleForLoader, callback);
-        //getSupportLoaderManager().initLoader(FAVORITE_MOVIE_LOADER_ID, bundleForLoader, callback);
-
-
-
-        Log.d(TAG, "before init...");
-        //MovieSyncUtils.initialize(this);
-        //MovieSyncUtils.startImmediateSync(this, mSortBy);
-
-        getSupportLoaderManager().initLoader(EVENT_LOADER_ID, null, callback);
-        SyncUtils.startImmediateSync(this);
+//        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
+//
+//        LinearLayoutManager layoutManager
+//                = new LinearLayoutManager(this);
+//        mRecyclerView.setLayoutManager(layoutManager);
+//        mRecyclerView.setHasFixedSize(true);
+//        mEventApdapter = new EventAdapter(this, this);
+//        mRecyclerView.setAdapter(mEventApdapter);
+//
+//        LoaderManager.LoaderCallbacks<Cursor> callback = MainActivity.this;
+//        //Bundle bundleForLoader = new Bundle();
+//        //bundleForLoader.putString("keySortBy", mSortBy);
+//        //getSupportLoaderManager().initLoader(MOVIE_LOADER_ID, bundleForLoader, callback);
+//        //getSupportLoaderManager().initLoader(FAVORITE_MOVIE_LOADER_ID, bundleForLoader, callback);
+//
+//
+//        Log.d(TAG, "before init...");
+//        //MovieSyncUtils.initialize(this);
+//        //MovieSyncUtils.startImmediateSync(this, mSortBy);
+//
+//        getSupportLoaderManager().initLoader(EVENT_LOADER_ID, null, callback);
+//        SyncUtils.startImmediateSync(this);
 
     }
 
     public void onClickTest(View view){
          //URL url =  NetworkUtils.buildUrl();
          //NetworkUtils.fetchJsonArray();
-        SyncUtils.startImmediateSync(this);
+        SyncUtils.startImmediateSync(this, "music");
     }
 
     @Override
@@ -140,5 +155,12 @@ public class MainActivity extends AppCompatActivity implements
     private void showEventDataView() {
         //mErrorMessageDisplay.setVisibility(View.INVISIBLE);
         mRecyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+       mFragmentPagerAdapter.notifyDataSetChanged();
     }
 }

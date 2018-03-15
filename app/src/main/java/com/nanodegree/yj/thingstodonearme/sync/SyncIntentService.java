@@ -14,6 +14,7 @@ public class SyncIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        SyncTask.syncEvent(this);
+        String sortBy = intent.getStringExtra("sortBy");
+        SyncTask.syncEvent(this, sortBy);
     }
 }
