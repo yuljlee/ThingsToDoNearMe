@@ -38,9 +38,11 @@
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00ff00"
+        android:background="@color/colorPrimaryDark"
+        app:tabTextColor="#9FA8DA"
+        app:tabSelectedTextColor="#E8EAF6"
         app:tabGravity="center"
-        app:tabIndicatorColor="#bf3203"
+        app:tabIndicatorColor="#ffffff"
         app:tabMode="scrollable" />
 
     <android.support.v4.view.ViewPager

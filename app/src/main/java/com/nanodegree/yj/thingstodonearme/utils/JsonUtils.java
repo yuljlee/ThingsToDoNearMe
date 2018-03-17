@@ -45,6 +45,7 @@ public final class JsonUtils {
         String state;
         String display_address;
         String cross_streets;
+        String category;
 
         for (int i = 0; i < eventArray.length(); i++) {
             JSONObject eachMoive = eventArray.getJSONObject(i);
@@ -68,6 +69,7 @@ public final class JsonUtils {
             state = location.getString("state");
             display_address = location.getString("display_address");
             cross_streets = location.getString("cross_streets");
+            category = eachMoive.getString("category");
 
             //movies.add(new Movie(movieTitle, posterPath, releaseDate, voteAverage, overview));
             ContentValues eventValues = new ContentValues();
@@ -89,6 +91,7 @@ public final class JsonUtils {
             eventValues.put(EventContract.EventEntry.COLUMN_STATE, state);
             eventValues.put(EventContract.EventEntry.COLUMN_DISPLAY_ADDRESS, display_address);
             eventValues.put(EventContract.EventEntry.COLUMN_CROSS_STREETS, cross_streets);
+            eventValues.put(EventContract.EventEntry.COLUMN_CATEGORY, category);
 
             eventContentValues[i] = eventValues;
         }

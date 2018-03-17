@@ -12,7 +12,7 @@ public class EventDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "eventDB.db";
 
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
     public EventDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -42,7 +42,8 @@ public class EventDbHelper extends SQLiteOpenHelper {
                         EventContract.EventEntry.COLUMN_COUNTRY      + " TEXT NOT NULL, "                    +
                         EventContract.EventEntry.COLUMN_STATE        + " TEXT NOT NULL, "                    +
                         EventContract.EventEntry.COLUMN_DISPLAY_ADDRESS  + " TEXT NOT NULL, "                    +
-                        EventContract.EventEntry.COLUMN_CROSS_STREETS    + " TEXT NOT NULL "                    +
+                        EventContract.EventEntry.COLUMN_CROSS_STREETS    + " TEXT NOT NULL, "                    +
+                        EventContract.EventEntry.COLUMN_CATEGORY     + " TEXT NOT NULL "                    +
                         " );";
 
         db.execSQL(SQL_CREATE_EVENT_TABLE);

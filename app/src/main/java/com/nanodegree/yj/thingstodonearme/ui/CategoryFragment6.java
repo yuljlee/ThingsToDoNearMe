@@ -1,10 +1,7 @@
 package com.nanodegree.yj.thingstodonearme.ui;
 
 
-import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,41 +14,37 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.nanodegree.yj.thingstodonearme.MainActivity;
 import com.nanodegree.yj.thingstodonearme.R;
 import com.nanodegree.yj.thingstodonearme.model.EventAdapter;
 import com.nanodegree.yj.thingstodonearme.model.EventContract;
 import com.nanodegree.yj.thingstodonearme.sync.SyncUtils;
 
-import static android.content.ContentValues.TAG;
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoryFragment1 extends Fragment implements
+public class CategoryFragment6 extends Fragment implements
         EventAdapter.EventAdapterOnClickHandler
         , LoaderManager.LoaderCallbacks<Cursor>{
     public static final String ARG_PAGE = "ARG_PAGE";
 
     private int mPage;
-    private static final String TAG = CategoryFragment1.class.getSimpleName();
+    private static final String TAG = CategoryFragment6.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
     private EventAdapter mEventApdapter;
-    private static final int EVENT_LOADER_ID = 77;
+    private static final int EVENT_LOADER_ID = 86;
     private int mPosition = RecyclerView.NO_POSITION;
 
-    public CategoryFragment1() {
+    public CategoryFragment6() {
         // Required empty public constructor
     }
 
     //public static CategoryFragment1 newInstance(int page) {
-    public static CategoryFragment1 newInstance() {
+    public static CategoryFragment6 newInstance() {
         Bundle args = new Bundle();
         //args.putInt(ARG_PAGE, page);
-        CategoryFragment1 fragment = new CategoryFragment1();
+        CategoryFragment6 fragment = new CategoryFragment6();
         fragment.setArguments(args);
         return fragment;
     }
@@ -66,12 +59,12 @@ public class CategoryFragment1 extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_category_fragment1, container, false);
+        View view = inflater.inflate(R.layout.fragment_category_fragment6, container, false);
 
         //TextView textView = (TextView) view.findViewById(R.id.textview);
         //textView.setText("Fragment #" + mPage);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_main);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_frag6);
 
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getContext());
@@ -108,9 +101,9 @@ public class CategoryFragment1 extends Fragment implements
         Log.d(TAG, "before init...");
 
         Bundle bundleForLoader = new Bundle();
-        bundleForLoader.putString("category", "music");
+        bundleForLoader.putString("category", "fashion");
         getActivity().getSupportLoaderManager().initLoader(EVENT_LOADER_ID, bundleForLoader, callback);
-        SyncUtils.startImmediateSync(getContext(), "music");
+        SyncUtils.startImmediateSync(getContext(), "fashion");
     }
 
     @Override

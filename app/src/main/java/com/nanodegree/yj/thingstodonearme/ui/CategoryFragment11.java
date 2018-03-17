@@ -3,6 +3,7 @@ package com.nanodegree.yj.thingstodonearme.ui;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -16,36 +17,54 @@ import android.view.ViewGroup;
 
 import com.nanodegree.yj.thingstodonearme.R;
 import com.nanodegree.yj.thingstodonearme.model.EventAdapter;
-import com.nanodegree.yj.thingstodonearme.model.EventAdapterFrag2;
 import com.nanodegree.yj.thingstodonearme.model.EventContract;
 import com.nanodegree.yj.thingstodonearme.sync.SyncUtils;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoryFragment2 extends Fragment implements
+public class CategoryFragment11 extends Fragment implements
         EventAdapter.EventAdapterOnClickHandler
         , LoaderManager.LoaderCallbacks<Cursor>{
+    public static final String ARG_PAGE = "ARG_PAGE";
 
     private int mPage;
-    private static final String TAG = CategoryFragment2.class.getSimpleName();
+    private static final String TAG = CategoryFragment11.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
     private EventAdapter mEventApdapter;
-    private static final int EVENT_LOADER_ID = 82;
+    private static final int EVENT_LOADER_ID = 91;
     private int mPosition = RecyclerView.NO_POSITION;
 
-    public CategoryFragment2() {
+    public CategoryFragment11() {
         // Required empty public constructor
+    }
+
+    //public static CategoryFragment1 newInstance(int page) {
+    public static CategoryFragment11 newInstance() {
+        Bundle args = new Bundle();
+        //args.putInt(ARG_PAGE, page);
+        CategoryFragment11 fragment = new CategoryFragment11();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mPage = getArguments().getInt(ARG_PAGE);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_category_fragment2, container, false);
+        View view = inflater.inflate(R.layout.fragment_category_fragment11, container, false);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_frag2);
+        //TextView textView = (TextView) view.findViewById(R.id.textview);
+        //textView.setText("Fragment #" + mPage);
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_frag11);
 
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getContext());
@@ -54,40 +73,27 @@ public class CategoryFragment2 extends Fragment implements
         mEventApdapter = new EventAdapter(getContext(), this);
         mRecyclerView.setAdapter(mEventApdapter);
 
-        LoaderManager.LoaderCallbacks<Cursor> callback = this;
-        //Bundle bundleForLoader = new Bundle();
-        //bundleForLoader.putString("keySortBy", mSortBy);
-        //getSupportLoaderManager().initLoader(MOVIE_LOADER_ID, bundleForLoader, callback);
-        //getSupportLoaderManager().initLoader(FAVORITE_MOVIE_LOADER_ID, bundleForLoader, callback);
-
-
-        Log.d(TAG, "before init...");
-        //MovieSyncUtils.initialize(this);
-        //MovieSyncUtils.startImmediateSync(this, mSortBy);
-
-        Bundle bundle = new Bundle();
-        bundle.putString("category", "fashion");
-        getActivity().getSupportLoaderManager().initLoader(EVENT_LOADER_ID, bundle, callback);
-        SyncUtils.startImmediateSync(getContext(), "fashion");
-
-        //getActivity().getSupportLoaderManager().initLoader(EVENT_LOADER_ID, null, callback);
-        //SyncUtils.startImmediateSync(getContext(), "visual-arts");
-        //SyncUtils.startImmediateSync(getContext(), "fashion");
-
-
         return view;
+        //return inflater.inflate(R.layout.fragment_category_fragment1, container, false);
     }
 
-    public static CategoryFragment2 newInstance() {
-        Bundle args = new Bundle();
-        //args.putInt(ARG_PAGE, page);
-        CategoryFragment2 fragment = new CategoryFragment2();
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        LoaderManager.LoaderCallbacks<Cursor> callback = this;
+
+        Log.d(TAG, "before init...");
+
+        Bundle bundleForLoader = new Bundle();
+        bundleForLoader.putString("category", "nightlife");
+        getActivity().getSupportLoaderManager().initLoader(EVENT_LOADER_ID, bundleForLoader, callback);
+        SyncUtils.startImmediateSync(getContext(), "nightlife");
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
         //String cat = args[0].getString("category");
         String[] selectionArgs = {args.getString("category")};
         switch (id) {
@@ -96,6 +102,7 @@ public class CategoryFragment2 extends Fragment implements
                 return new CursorLoader(getContext(),
                         EventContract.EventEntry.CONTENT_URI,
                         null,
+                        //EventContract.EventEntry.COLUMN_CATEGORY + " = ?",
                         EventContract.EventEntry.COLUMN_CATEGORY + " = ?",
                         selectionArgs,
                         null);
@@ -125,7 +132,24 @@ public class CategoryFragment2 extends Fragment implements
 
     @Override
     public void onClick(int eventId) {
-
+//        Context context = getContext();
+//        Class destinationClass = DetailActivity.class;
+//        Intent intentToStartDetailActivity = new Intent(context, destinationClass);
+//        intentToStartDetailActivity.putExtra("movie", movie);
+//        startActivity(intentToStartDetailActivity);
+//
+//        Intent movieDetailIntent = new Intent(MainActivity.this, DetailActivity.class);
+//
+//        // if selected movie is not the favorite, check it exists in favorite table to set the star on or off
+//
+//        //Toast.makeText(this, "sort -> " + mSortBy, Toast.LENGTH_LONG).show();
+//        Log.d("onClick: indexId -> ", String.valueOf(indexId));
+//        Log.d("onClick: mSortBy -> ", mSortBy);
+//
+//        Uri uriMovieClicked = EventContract.EventEntry.buildMovieUriWithId(indexId);
+//        movieDetailIntent.setData(uriMovieClicked);
+//        startActivity(movieDetailIntent);
+//        //startActivityForResult(movieDetailIntent, PICK_MOVIE_REQUEST);
     }
 
     private void showEventDataView() {

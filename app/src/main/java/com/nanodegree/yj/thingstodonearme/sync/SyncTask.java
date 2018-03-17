@@ -121,6 +121,7 @@ public class SyncTask {
 
 
 
+
             Log.v("data:", jsonItem);
 
             ContentValues[] eventValues = JsonUtils
@@ -128,12 +129,14 @@ public class SyncTask {
 
             if (eventValues != null && eventValues.length != 0) {
 
+                String[] selecttionArgs = {sortBy};
+
                 ContentResolver eventContentResolver = context.getContentResolver();
 
                 eventContentResolver.delete(
                         EventContract.EventEntry.CONTENT_URI,
-                        null,
-                        null);
+                        EventContract.EventEntry.COLUMN_CATEGORY + " = ?",
+                        selecttionArgs);
 
                 eventContentResolver.bulkInsert(
                         EventContract.EventEntry.CONTENT_URI,

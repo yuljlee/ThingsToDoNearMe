@@ -51,6 +51,7 @@ public class EventProvider extends ContentProvider {
                         @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         Cursor cursor;
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+        selection = "category = ?";
 
         switch (sUriMatcher.match(uri)) {
 
@@ -195,6 +196,8 @@ public class EventProvider extends ContentProvider {
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
         int numRowsDeleted;
+
+        selection = "category = ?";
 
         if (null == selection) selection = "1";
 

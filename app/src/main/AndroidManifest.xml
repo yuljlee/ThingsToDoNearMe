@@ -18,14 +18,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".sync.SyncIntentService"
-            android:exported="false"/>
+            android:exported="false" />
         <!-- Our ContentProvider -->
         <provider
             android:name=".model.EventProvider"
             android:authorities="@string/content_authority"
-            android:exported="false"/>
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.DetailActivity"
+            android:label="@string/title_activity_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

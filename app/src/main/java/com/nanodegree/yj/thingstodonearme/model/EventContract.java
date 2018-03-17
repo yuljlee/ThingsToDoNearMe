@@ -45,6 +45,7 @@ public class EventContract {
         public static final String COLUMN_STATE = "state";
         public static final String COLUMN_DISPLAY_ADDRESS = "display_address";
         public static final String COLUMN_CROSS_STREETS = "cross_streets";
+        public static final String COLUMN_CATEGORY = "category";
 
         public static Uri buildEventUriWithId(int indexId) {
             return CONTENT_URI.buildUpon()
