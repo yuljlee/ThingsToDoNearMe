@@ -51,7 +51,7 @@ public class CategoryFragment2 extends Fragment implements
                 = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mEventApdapter = new EventAdapter(getContext(), this);
+        mEventApdapter = new EventAdapter(this);
         mRecyclerView.setAdapter(mEventApdapter);
 
         LoaderManager.LoaderCallbacks<Cursor> callback = this;

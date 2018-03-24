@@ -17,7 +17,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nanodegree.yj.thingstodonearme.MainActivity;
 import com.nanodegree.yj.thingstodonearme.R;
@@ -32,7 +34,7 @@ import static android.content.ContentValues.TAG;
  */
 public class CategoryFragment1 extends Fragment implements
         EventAdapter.EventAdapterOnClickHandler
-        , LoaderManager.LoaderCallbacks<Cursor>{
+        , LoaderManager.LoaderCallbacks<Cursor> {
     public static final String ARG_PAGE = "ARG_PAGE";
 
     private int mPage;
@@ -77,7 +79,7 @@ public class CategoryFragment1 extends Fragment implements
                 = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mEventApdapter = new EventAdapter(getContext(), this);
+        mEventApdapter = new EventAdapter(this);
         mRecyclerView.setAdapter(mEventApdapter);
 
 //        LoaderManager.LoaderCallbacks<Cursor> callback = this;
@@ -154,23 +156,26 @@ public class CategoryFragment1 extends Fragment implements
 
     @Override
     public void onClick(int eventId) {
-//        Context context = getContext();
-//        Class destinationClass = DetailActivity.class;
-//        Intent intentToStartDetailActivity = new Intent(context, destinationClass);
-//        intentToStartDetailActivity.putExtra("movie", movie);
-//        startActivity(intentToStartDetailActivity);
-//
-//        Intent movieDetailIntent = new Intent(MainActivity.this, DetailActivity.class);
-//
-//        // if selected movie is not the favorite, check it exists in favorite table to set the star on or off
-//
-//        //Toast.makeText(this, "sort -> " + mSortBy, Toast.LENGTH_LONG).show();
-//        Log.d("onClick: indexId -> ", String.valueOf(indexId));
-//        Log.d("onClick: mSortBy -> ", mSortBy);
-//
-//        Uri uriMovieClicked = EventContract.EventEntry.buildMovieUriWithId(indexId);
-//        movieDetailIntent.setData(uriMovieClicked);
-//        startActivity(movieDetailIntent);
+
+//        Toast.makeText(getContext(), TAG + " -> Apdapter Click OK", Toast.LENGTH_LONG).show();
+
+        Context context = getActivity();
+        Class destinationClass = DetailActivity.class;
+        Intent intentToStartDetailActivity = new Intent(context, destinationClass);
+////        intentToStartDetailActivity.putExtra("movie", movie);
+////        startActivity(intentToStartDetailActivity);
+////
+////        Intent movieDetailIntent = new Intent(MainActivity.this, DetailActivity.class);
+////
+////        // if selected movie is not the favorite, check it exists in favorite table to set the star on or off
+////
+////        //Toast.makeText(this, "sort -> " + mSortBy, Toast.LENGTH_LONG).show();
+////        Log.d("onClick: indexId -> ", String.valueOf(indexId));
+////        Log.d("onClick: mSortBy -> ", mSortBy);
+////
+        Uri uriMovieClicked = EventContract.EventEntry.buildEventUriWithId(eventId);
+        intentToStartDetailActivity.setData(uriMovieClicked);
+        startActivity(intentToStartDetailActivity);
 //        //startActivityForResult(movieDetailIntent, PICK_MOVIE_REQUEST);
     }
 

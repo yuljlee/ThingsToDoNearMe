@@ -23,7 +23,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
 
     private static final String TAG = EventAdapter.class.getSimpleName();
 
-    private final Context mContext;
+    //private final Context mContext;
     private ArrayList<Event> mEventData;
     private final EventAdapterOnClickHandler mClickHandler;
     private Cursor mCursor;
@@ -35,8 +35,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
         void onClick(int eventId);
     }
 
-    public EventAdapter(Context context, EventAdapterOnClickHandler clickHandler) {
-        mContext = context;
+    public EventAdapter(EventAdapterOnClickHandler clickHandler) {
+        //mContext = context;
         mClickHandler = clickHandler;
     }
 
@@ -64,6 +64,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
             mCursor.moveToPosition(adapterPosition);
             int indexId = mCursor.getInt(0); // movie id
             mClickHandler.onClick(indexId);
+
+            Log.v(TAG + " click ---> ", String.valueOf(indexId));
         }
     }
 

@@ -16,6 +16,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.nanodegree.yj.thingstodonearme.R;
 import com.nanodegree.yj.thingstodonearme.model.CategoryFragmentPagerAdapter;
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements
 //
 //        // if selected movie is not the favorite, check it exists in favorite table to set the star on or off
 //
-//        //Toast.makeText(this, "sort -> " + mSortBy, Toast.LENGTH_LONG).show();
+          Toast.makeText(this, "sort -> hi", Toast.LENGTH_LONG).show();
 //        Log.d("onClick: indexId -> ", String.valueOf(indexId));
 //        Log.d("onClick: mSortBy -> ", mSortBy);
 //        Uri uriMovieClicked;

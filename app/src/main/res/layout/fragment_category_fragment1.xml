@@ -4,14 +4,6 @@
     android:layout_height="200dp"
     tools:context="com.nanodegree.yj.thingstodonearme.ui.CategoryFragment1">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/textview"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        android:text="@string/hello_blank_fragment" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_main"
         android:layout_width="match_parent"
