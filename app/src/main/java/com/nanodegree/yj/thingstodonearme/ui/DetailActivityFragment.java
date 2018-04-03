@@ -36,6 +36,7 @@ public class DetailActivityFragment extends Fragment implements
     @BindView(R.id.name_textview) TextView mName;
     @BindView(R.id.desc_textview) TextView mDesc;
     @BindView(R.id.date_textview) TextView mDate;
+    @BindView(R.id.date_to_textview) TextView mDateTo;
     @BindView(R.id.location_textview) TextView mLocation;
 
     Unbinder unbinder;
@@ -49,6 +50,7 @@ public class DetailActivityFragment extends Fragment implements
     public static final int INDEX_EVENT_DESC = 3;
     public static final int INDEX_EVENT_INAGE_URL = 5;
     public static final int INDEX_EVENT_DATE = 6;
+    public static final int INDEX_EVENT_DATE_TO = 7;
     public static final int INDEX_EVENT_LOCATION = 17;
 
     public DetailActivityFragment() {
@@ -115,15 +117,32 @@ public class DetailActivityFragment extends Fragment implements
                 .into(mEventImage);
         mName.setText(data.getString(INDEX_EVENT_NAME));
         mDesc.setText(data.getString(INDEX_EVENT_DESC));
-        String eventDate = convertDateFormat(data.getString(INDEX_EVENT_DATE));
-        mDate.setText(eventDate);
+        String eventDate = reformatDate(data.getString(INDEX_EVENT_DATE));
+        mDate.setText("From: " + eventDate);
+        String eventDateEnd = data.getString(INDEX_EVENT_DATE_TO);
+        if (eventDateEnd != null && !eventDateEnd.isEmpty() && !eventDateEnd.equals("null")) {
+            //eventDateEnd = reformatDate(data.getString(INDEX_EVENT_DATE_TO));
+            mDateTo.setText("To: " + reformatDate(eventDateEnd));
+        }
         mLocation.setText(data.getString(INDEX_EVENT_LOCATION));
-
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         //mEventApdapter.swapCursor(null);
+    }
+
+    private String reformatDate(String dateIn) throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(dateIn);
+            simpleDateFormat = new SimpleDateFormat("EEE, MMM d, yyyy, h:mm a"); // Sat, Mar 24, 2018, 4:00 PM
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+
+        return simpleDateFormat.format(date);
     }
 
     private String convertDateFormat(String dateString) {
