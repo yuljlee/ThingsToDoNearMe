@@ -1,30 +1,44 @@
 package com.nanodegree.yj.thingstodonearme.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
-import android.net.ParseException;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.maps.model.LatLng;
 import com.nanodegree.yj.thingstodonearme.R;
 import com.nanodegree.yj.thingstodonearme.model.EventAdapter;
+import com.nanodegree.yj.thingstodonearme.model.EventContract;
+import com.nanodegree.yj.thingstodonearme.utils.CommonUtils;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
+
+import static com.nanodegree.yj.thingstodonearme.utils.CommonUtils.convertAddress;
+import static com.nanodegree.yj.thingstodonearme.utils.CommonUtils.reformatDate;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -38,22 +52,52 @@ public class DetailActivityFragment extends Fragment implements
     @BindView(R.id.date_textview) TextView mDate;
     @BindView(R.id.date_to_textview) TextView mDateTo;
     @BindView(R.id.location_textview) TextView mLocation;
+    @BindView(R.id.adView) AdView mAdView;
+    @BindView(R.id.fab) FloatingActionButton mFab;
 
     Unbinder unbinder;
     Uri mUri;
+    String mSiteUrl;
     private static final int EVENT_DETAIL_LOADER = 10;
     private EventAdapter mEventApdapter;
+
+    private double mLatitude = 33.898580;
+    private double mLogitude = -117.983674;
+    //private double mLatitude = 0.0;
+    //private double mLogitude = -111.0;
+    private double[] mLatLng = {mLatitude, mLogitude};
 
     public static final int INDEX_ID = 0;
     public static final int INDEX_EVENT_ID = 1;
     public static final int INDEX_EVENT_NAME = 2;
     public static final int INDEX_EVENT_DESC = 3;
+    public static final int INDEX_EVENT_SITE_URL = 4;
     public static final int INDEX_EVENT_INAGE_URL = 5;
     public static final int INDEX_EVENT_DATE = 6;
     public static final int INDEX_EVENT_DATE_TO = 7;
+    public static final int INDEX_EVENT_LATITUDE = 8;
+    public static final int INDEX_EVENT_LONGITUGE = 9;
     public static final int INDEX_EVENT_LOCATION = 17;
 
     public DetailActivityFragment() {
+    }
+
+    @OnClick(R.id.url_button)
+    public void launchUrl() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mSiteUrl));
+        startActivity(browserIntent);
+    }
+
+    @OnClick(R.id.fab)
+    public void launchMap() {
+        Context context = getActivity();
+        Class destinationClass = MapsActivity.class;
+        Intent intent = new Intent(context, destinationClass);
+        //Uri uriMovieClicked = EventContract.EventEntry.buildEventUriWithId(eventId);
+        //intentToStartDetailActivity.setData(uriMovieClicked);
+        intent.putExtra("event_location", mLatLng);
+
+        startActivity(intent);
     }
 
     @Override
@@ -61,6 +105,10 @@ public class DetailActivityFragment extends Fragment implements
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
         unbinder = ButterKnife.bind(this, view);
+
+        MobileAds.initialize(getActivity(), "ca-app-pub-3940256099942544~3347511713");
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         return view;
     }
@@ -93,7 +141,6 @@ public class DetailActivityFragment extends Fragment implements
                         null,
                         null,
                         null);
-
             default:
                 throw new RuntimeException("Loader Not Implemented: " + loaderId);
         }
@@ -124,25 +171,17 @@ public class DetailActivityFragment extends Fragment implements
             //eventDateEnd = reformatDate(data.getString(INDEX_EVENT_DATE_TO));
             mDateTo.setText("To: " + reformatDate(eventDateEnd));
         }
-        mLocation.setText(data.getString(INDEX_EVENT_LOCATION));
+        mLocation.setText(convertAddress(data.getString(INDEX_EVENT_LOCATION)));
+        mSiteUrl = data.getString(INDEX_EVENT_SITE_URL);
+        //mLatitude = data.getDouble(INDEX_EVENT_LATITUDE);
+        //mLogitude = data.getDouble(INDEX_EVENT_LONGITUGE);
+        mLatLng[0] = data.getDouble(INDEX_EVENT_LATITUDE);
+        mLatLng[1] = data.getDouble(INDEX_EVENT_LONGITUGE);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         //mEventApdapter.swapCursor(null);
-    }
-
-    private String reformatDate(String dateIn) throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-        Date date = null;
-        try {
-            date = simpleDateFormat.parse(dateIn);
-            simpleDateFormat = new SimpleDateFormat("EEE, MMM d, yyyy, h:mm a"); // Sat, Mar 24, 2018, 4:00 PM
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-
-        return simpleDateFormat.format(date);
     }
 
     private String convertDateFormat(String dateString) {

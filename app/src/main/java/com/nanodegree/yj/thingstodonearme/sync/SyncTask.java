@@ -120,8 +120,6 @@ public class SyncTask {
 //            /////////////////////
 
 
-
-
             Log.v("data:", jsonItem);
 
             ContentValues[] eventValues = JsonUtils

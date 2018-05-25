@@ -129,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements
                         null,
                         null,
                         null);
-
             default:
                 throw new RuntimeException("Loading Error " + loaderId);
         }

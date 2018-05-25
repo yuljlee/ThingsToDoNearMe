@@ -18,8 +18,8 @@ public class Event implements Parcelable {
     private String image_url;
     private String time_start;
     private String time_end;
-    private long latitude;
-    private long longitude;
+    private double latitude;
+    private double longitude;
     private ArrayList<Location> location;
 
     public Event (String event_id, String name, String description, String event_site_url
@@ -64,8 +64,8 @@ public class Event implements Parcelable {
         dest.writeString(image_url);
         dest.writeString(time_end);
         dest.writeString(time_start);
-        dest.writeLong(latitude);
-        dest.writeLong(longitude);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
         if (location == null) {
             dest.writeByte((byte) (0x00));
         } else {
@@ -118,11 +118,11 @@ public class Event implements Parcelable {
         return time_end;
     }
 
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 

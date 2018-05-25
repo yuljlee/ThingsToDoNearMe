@@ -14,7 +14,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -39,7 +38,7 @@ public final class NetworkUtils {
                 //.appendQueryParameter(Constant.YELP_LOCATION_QUERY_PARAMETER, "san francisco, CA")
                 .appendQueryParameter(Constant.YELP_LIMIT_QUERY_PARAMETER, "10")
                 .appendQueryParameter(Constant.YELP_SORT_QUERY_PARAMETER, "popularity")
-                .appendQueryParameter(Constant.YELP_STARTDATE_QUERY_PARAMETER, "1520035200")
+                .appendQueryParameter(Constant.YELP_STARTDATE_QUERY_PARAMETER, "1527013169")
                 .build();
 
         URL url = null;

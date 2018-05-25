@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nanodegree.yj.thingstodonearme.R;
+import com.nanodegree.yj.thingstodonearme.utils.CommonUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -89,14 +90,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
         String posterUrl = mCursor.getString(5);
         //movieAdapterViewHolder.mMovieTextView.setText(mCursor.getString(1));
 
-        Context context = holder.mMoviePoster1.getContext();
-        Picasso.with(context)
-                .load(posterUrl)
-                .into(holder.mMoviePoster1);
+        if (!posterUrl.equals("") && posterUrl != null) {
+            Context context = holder.mMoviePoster1.getContext();
+            Picasso.with(context)
+                    .load(posterUrl)
+                    .into(holder.mMoviePoster1);
+        }
 
         holder.mEventTextView.setText(mCursor.getString(2)); // event name
-        holder.mDateTextView.setText(mCursor.getString(6));  // event date
-        holder.mLocationTextView.setText(mCursor.getString(17)); // event location
+        holder.mDateTextView.setText(CommonUtils.reformatDate(mCursor.getString(6)));  // event date
+        holder.mLocationTextView.setText(CommonUtils.convertAddress(mCursor.getString(17))); // event location
     }
 
     @Override

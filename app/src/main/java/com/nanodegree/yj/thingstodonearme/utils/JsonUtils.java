@@ -33,8 +33,8 @@ public final class JsonUtils {
         String image_url;
         String time_start;
         String time_end;
-        long latitude;
-        long longitude;
+        double latitude;
+        double longitude;
         JSONObject location;
         String address1;
         String address2;
@@ -57,8 +57,8 @@ public final class JsonUtils {
             image_url = eachMoive.getString("image_url");
             time_start = eachMoive.getString("time_start");
             time_end = eachMoive.getString("time_end");
-            latitude = eachMoive.getLong("latitude");
-            longitude = eachMoive.getLong("longitude");
+            latitude = eachMoive.getDouble("latitude");
+            longitude = eachMoive.getDouble("longitude");
             location = eachMoive.getJSONObject("location");
             address1 = location.getString("address1");
             address2 = location.getString("address2");
