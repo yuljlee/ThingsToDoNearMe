@@ -17,17 +17,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.nanodegree.yj.thingstodonearme.MainActivity;
 import com.nanodegree.yj.thingstodonearme.R;
 import com.nanodegree.yj.thingstodonearme.model.EventAdapter;
 import com.nanodegree.yj.thingstodonearme.model.EventContract;
 import com.nanodegree.yj.thingstodonearme.sync.SyncUtils;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * A simple {@link Fragment} subclass.

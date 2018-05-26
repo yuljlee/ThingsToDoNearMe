@@ -1,8 +1,6 @@
-package com.nanodegree.yj.thingstodonearme;
+package com.nanodegree.yj.thingstodonearme.ui;
 
-import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.LoaderManager;
@@ -11,8 +9,6 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -23,12 +19,6 @@ import com.nanodegree.yj.thingstodonearme.model.CategoryFragmentPagerAdapter;
 import com.nanodegree.yj.thingstodonearme.model.EventAdapter;
 import com.nanodegree.yj.thingstodonearme.model.EventContract;
 import com.nanodegree.yj.thingstodonearme.sync.SyncUtils;
-import com.nanodegree.yj.thingstodonearme.utils.NetworkUtils;
-
-import java.io.IOException;
-import java.net.URL;
-
-import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements
         EventAdapter.EventAdapterOnClickHandler
