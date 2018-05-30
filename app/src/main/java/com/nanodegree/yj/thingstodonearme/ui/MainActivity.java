@@ -1,6 +1,9 @@
 package com.nanodegree.yj.thingstodonearme.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.LoaderManager;
@@ -10,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -20,11 +24,21 @@ import com.nanodegree.yj.thingstodonearme.model.EventAdapter;
 import com.nanodegree.yj.thingstodonearme.model.EventContract;
 import com.nanodegree.yj.thingstodonearme.sync.SyncUtils;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
 public class MainActivity extends AppCompatActivity implements
         EventAdapter.EventAdapterOnClickHandler
         , LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    static final int PICK_CITY_REQUEST = 1;  // The request code
+
+    @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.view_pager) ViewPager mViewPager;
+    @BindView(R.id.sliding_tabs) TabLayout mTabLayout;
 
     private RecyclerView mRecyclerView;
     private EventAdapter mEventApdapter;
@@ -36,42 +50,48 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        // show city name
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Los Angeles");
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        //ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         mFragmentPagerAdapter = new CategoryFragmentPagerAdapter(getSupportFragmentManager(), this);
 //        viewPager.setAdapter(new CategoryFragmentPagerAdapter(getSupportFragmentManager(),
 //                MainActivity.this));
-        viewPager.setAdapter((mFragmentPagerAdapter));
+        mViewPager.setAdapter((mFragmentPagerAdapter));
 
         // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        //TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
+    }
 
-        //ButterKnife.bind(this);
-//        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
-//
-//        LinearLayoutManager layoutManager
-//                = new LinearLayoutManager(this);
-//        mRecyclerView.setLayoutManager(layoutManager);
-//        mRecyclerView.setHasFixedSize(true);
-//        mEventApdapter = new EventAdapter(this, this);
-//        mRecyclerView.setAdapter(mEventApdapter);
-//
-//        LoaderManager.LoaderCallbacks<Cursor> callback = MainActivity.this;
-//        //Bundle bundleForLoader = new Bundle();
-//        //bundleForLoader.putString("keySortBy", mSortBy);
-//        //getSupportLoaderManager().initLoader(MOVIE_LOADER_ID, bundleForLoader, callback);
-//        //getSupportLoaderManager().initLoader(FAVORITE_MOVIE_LOADER_ID, bundleForLoader, callback);
-//
-//
-//        Log.d(TAG, "before init...");
-//        //MovieSyncUtils.initialize(this);
-//        //MovieSyncUtils.startImmediateSync(this, mSortBy);
-//
-//        getSupportLoaderManager().initLoader(EVENT_LOADER_ID, null, callback);
-//        SyncUtils.startImmediateSync(this);
+    @OnClick(R.id.toolbar)
+    public void showCityList() {
+        //Toast.makeText(this, "I'm in Los Angeles", Toast.LENGTH_LONG).show();
 
+        Class destinationClass = SearchActivity.class;
+        Intent intent = new Intent(this, destinationClass);
+        //intent.putExtra("city_name", "San Diego");
+
+        startActivityForResult(intent, PICK_CITY_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == PICK_CITY_REQUEST)
+        {
+            if (resultCode == RESULT_OK) {
+                String cityName = data.getStringExtra("city_name").toString();
+                //Toast.makeText(this, "I got it ---> " + cityName, Toast.LENGTH_LONG).show();
+                getSupportActionBar().setTitle(cityName);
+            }
+        }
     }
 
     public void onClickTest(View view){

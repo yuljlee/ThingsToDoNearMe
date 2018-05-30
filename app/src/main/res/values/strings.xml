@@ -7,4 +7,6 @@
     <string name="title_activity_detail"></string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps"></string>
+    <string name="label_search">Which city?</string>
+    <string name="label_city">Choose city name...</string>
 </resources>

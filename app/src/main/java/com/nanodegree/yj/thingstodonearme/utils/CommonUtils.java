@@ -33,11 +33,10 @@ public final class CommonUtils {
     }
 
     public static String convertAddress(String address) {
-        //String newAddress;
         address = address.replace("\"", "");
         address = address.replace("[", "");
         address = address.replace("]", "");
-        address = address.replace(",", "");
+        //address = address.replace(",", "");
 
         return address;
     }
