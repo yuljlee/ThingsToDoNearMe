@@ -1,7 +1,11 @@
 package com.nanodegree.yj.thingstodonearme.ui;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,6 +23,10 @@ import com.nanodegree.yj.thingstodonearme.R;
 import com.nanodegree.yj.thingstodonearme.model.EventAdapter;
 import com.nanodegree.yj.thingstodonearme.model.EventContract;
 import com.nanodegree.yj.thingstodonearme.sync.SyncUtils;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.nanodegree.yj.thingstodonearme.model.Constant.DEFAULT_LOCATION;
+import static com.nanodegree.yj.thingstodonearme.model.Constant.LOCATION_KEY;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,6 +85,11 @@ public class CategoryFragment3 extends Fragment implements
         //return inflater.inflate(R.layout.fragment_category_fragment1, container, false);
     }
 
+    private String loadPreferences() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("settings", MODE_PRIVATE);
+        return sharedPreferences.getString(LOCATION_KEY, DEFAULT_LOCATION);
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -88,7 +101,7 @@ public class CategoryFragment3 extends Fragment implements
         Bundle bundleForLoader = new Bundle();
         bundleForLoader.putString("category", "performing-arts");
         getActivity().getSupportLoaderManager().initLoader(EVENT_LOADER_ID, bundleForLoader, callback);
-        SyncUtils.startImmediateSync(getContext(), "performing-arts");
+        SyncUtils.startImmediateSync(getContext(), "performing-arts", loadPreferences());
     }
 
     @Override
@@ -133,7 +146,15 @@ public class CategoryFragment3 extends Fragment implements
     @Override
     public void onClick(int eventId) {
 
+        Context context = getActivity();
+        Class destinationClass = DetailActivity.class;
+        Intent intentToStartDetailActivity = new Intent(context, destinationClass);
+
+        Uri uriMovieClicked = EventContract.EventEntry.buildEventUriWithId(eventId);
+        intentToStartDetailActivity.setData(uriMovieClicked);
+        startActivity(intentToStartDetailActivity);
     }
+
 
     private void showEventDataView() {
         //mErrorMessageDisplay.setVisibility(View.INVISIBLE);

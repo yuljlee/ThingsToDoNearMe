@@ -14,7 +14,11 @@ public class Constant {
     public static final String YELP_LIMIT_QUERY_PARAMETER = "limit";
     public static final String YELP_SORT_QUERY_PARAMETER = "sort_on";
     public static final String YELP_STARTDATE_QUERY_PARAMETER = "start_date";
-//    public static final String[] CATEGORY = {"music",
+
+    public static final String LOCATION_KEY = "location_key";
+    public static final String DEFAULT_LOCATION = "Los Angeles, CA";
+
+    //    public static final String[] CATEGORY = {"music",
 //            Visual Arts (visual-arts)
 //            Performing Arts (performing-arts)
 //            Film (film)

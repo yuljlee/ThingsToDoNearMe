@@ -3,6 +3,7 @@ package com.nanodegree.yj.thingstodonearme.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,9 +20,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nanodegree.yj.thingstodonearme.R;
+import com.nanodegree.yj.thingstodonearme.model.Constant;
 import com.nanodegree.yj.thingstodonearme.model.EventAdapter;
 import com.nanodegree.yj.thingstodonearme.model.EventContract;
 import com.nanodegree.yj.thingstodonearme.sync.SyncUtils;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.nanodegree.yj.thingstodonearme.model.Constant.DEFAULT_LOCATION;
+import static com.nanodegree.yj.thingstodonearme.model.Constant.LOCATION_KEY;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +55,7 @@ public class CategoryFragment1 extends Fragment implements
         //args.putInt(ARG_PAGE, page);
         CategoryFragment1 fragment = new CategoryFragment1();
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -76,23 +83,12 @@ public class CategoryFragment1 extends Fragment implements
         mEventApdapter = new EventAdapter(this);
         mRecyclerView.setAdapter(mEventApdapter);
 
-//        LoaderManager.LoaderCallbacks<Cursor> callback = this;
-//        //Bundle bundleForLoader = new Bundle();
-//        //bundleForLoader.putString("keySortBy", mSortBy);
-//        //getSupportLoaderManager().initLoader(MOVIE_LOADER_ID, bundleForLoader, callback);
-//        //getSupportLoaderManager().initLoader(FAVORITE_MOVIE_LOADER_ID, bundleForLoader, callback);
-//
-//
-//        Log.d(TAG, "before init...");
-//        //MovieSyncUtils.initialize(this);
-//        //MovieSyncUtils.startImmediateSync(this, mSortBy);
-//        Bundle bundle = new Bundle();
-//        bundle.putString("category", "music");
-//        getActivity().getSupportLoaderManager().initLoader(EVENT_LOADER_ID, bundle, callback);
-//        SyncUtils.startImmediateSync(getContext(), "music");
-
         return view;
-        //return inflater.inflate(R.layout.fragment_category_fragment1, container, false);
+    }
+
+    private String loadPreferences() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("settings", MODE_PRIVATE);
+        return sharedPreferences.getString(LOCATION_KEY, DEFAULT_LOCATION);
     }
 
     @Override
@@ -105,8 +101,12 @@ public class CategoryFragment1 extends Fragment implements
 
         Bundle bundleForLoader = new Bundle();
         bundleForLoader.putString("category", "music");
+
         getActivity().getSupportLoaderManager().initLoader(EVENT_LOADER_ID, bundleForLoader, callback);
-        SyncUtils.startImmediateSync(getContext(), "music");
+
+        loadPreferences();
+
+        SyncUtils.startImmediateSync(getContext(), "music", loadPreferences());
     }
 
     @Override
@@ -156,21 +156,10 @@ public class CategoryFragment1 extends Fragment implements
         Context context = getActivity();
         Class destinationClass = DetailActivity.class;
         Intent intentToStartDetailActivity = new Intent(context, destinationClass);
-////        intentToStartDetailActivity.putExtra("movie", movie);
-////        startActivity(intentToStartDetailActivity);
-////
-////        Intent movieDetailIntent = new Intent(MainActivity.this, DetailActivity.class);
-////
-////        // if selected movie is not the favorite, check it exists in favorite table to set the star on or off
-////
-////        //Toast.makeText(this, "sort -> " + mSortBy, Toast.LENGTH_LONG).show();
-////        Log.d("onClick: indexId -> ", String.valueOf(indexId));
-////        Log.d("onClick: mSortBy -> ", mSortBy);
-////
+
         Uri uriMovieClicked = EventContract.EventEntry.buildEventUriWithId(eventId);
         intentToStartDetailActivity.setData(uriMovieClicked);
         startActivity(intentToStartDetailActivity);
-//        //startActivityForResult(movieDetailIntent, PICK_MOVIE_REQUEST);
     }
 
     private void showEventDataView() {

@@ -23,11 +23,6 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.autoCompleteTextView) AutoCompleteTextView mAutoTextView;
 
-    String[] us_city = new String[] {
-            "Los Angeles", "San Diego", "San Francisco", "San Antonio", "New York", "Chicago", "Cincinnati, OH", "Cleveland, OH",
-            "Houston, TX", "about", "absolute", "access", "activity", "adjust"
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +33,7 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        final String[] us_city = getResources().getStringArray(R.array.us_city);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, us_city);
         mAutoTextView.setAdapter(arrayAdapter);

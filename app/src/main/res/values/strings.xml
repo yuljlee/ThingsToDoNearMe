@@ -3,10 +3,44 @@
     <string name="content_authority">com.nanodegree.yj.thingstodonearme</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment"></string>
     <string name="title_activity_detail"></string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps"></string>
     <string name="label_search">Which city?</string>
     <string name="label_city">Choose city name...</string>
+    <string-array name="us_city">
+        <item>New York, NY</item>
+        <item>Los Angeles, CA</item>
+        <item>Chicago, IL</item>
+        <item>Houston, TX</item>
+        <item>Philadelphia, PA</item>
+        <item>Phoenix, AZ</item>
+        <item>San Antonio, TX</item>
+        <item>San Diego, CA</item>
+        <item>Dallas, TX</item>
+        <item>San Jose, CA</item>
+        <item>Indianapolis, IN</item>
+        <item>Jacksonville, FL</item>
+        <item>San Francisco, CA</item>
+        <item>Austin, TX</item>
+        <item>Columbus, OH</item>
+        <item>Fort Worth, TX</item>
+        <item>Louisville-Jefferson, KY</item>
+        <item>Charlotte, NC</item>
+        <item>Detroit, MI</item>
+        <item>El Paso, TX</item>
+        <item>Memphis, TN</item>
+        <item>Nashville-Davidson, TN</item>
+        <item>Baltimore, MD</item>
+        <item>Boston, MA</item>
+        <item>Seattle, WA</item>
+        <item>Washington, DC</item>
+        <item>Denver, CO</item>
+        <item>Milwaukee, WI</item>
+        <item>Portland, OR</item>
+        <item>Las Vegas, NV</item>
+    </string-array>
+    <string name="appwidget_text">Near me</string>
+    <string name="add_widget">Add widget</string>
 </resources>

@@ -29,16 +29,18 @@ public final class NetworkUtils {
 
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
-    public static URL buildUrl(String category) {
+    public static URL buildUrl(String category, String location, String startTime) {
 
         Uri builtUri = Uri.parse(Constant.YELP_BASE_URL).buildUpon()
                 .appendQueryParameter(Constant.YELP_CATEGORY_QUERY_PARAMETER, category)
                 //.appendQueryParameter(Constant.YELP_CATEGORY_QUERY_PARAMETER, "food-and-drink")
-                .appendQueryParameter(Constant.YELP_LOCATION_QUERY_PARAMETER, "los angeles, CA")
-                //.appendQueryParameter(Constant.YELP_LOCATION_QUERY_PARAMETER, "san francisco, CA")
+                //.appendQueryParameter(Constant.YELP_LOCATION_QUERY_PARAMETER, "Los Angeles, CA")
+                //.appendQueryParameter(Constant.YELP_LOCATION_QUERY_PARAMETER, "Chicago, IL")
+                .appendQueryParameter(Constant.YELP_LOCATION_QUERY_PARAMETER, location)
                 .appendQueryParameter(Constant.YELP_LIMIT_QUERY_PARAMETER, "10")
                 .appendQueryParameter(Constant.YELP_SORT_QUERY_PARAMETER, "popularity")
-                .appendQueryParameter(Constant.YELP_STARTDATE_QUERY_PARAMETER, "1527013169")
+                //.appendQueryParameter(Constant.YELP_SORT_QUERY_PARAMETER, "time_start")
+                .appendQueryParameter(Constant.YELP_STARTDATE_QUERY_PARAMETER, startTime)
                 .build();
 
         URL url = null;
@@ -52,10 +54,10 @@ public final class NetworkUtils {
         return url;
     }
 
-    public static String fetchJsonArray(String cat) {
+    public static String fetchJsonArray(String cat, String location, String epoch) {
         String itemsJson = null;
         try {
-            itemsJson = fetchPlainText(buildUrl(cat));
+            itemsJson = fetchPlainText(buildUrl(cat, location, epoch));
         } catch (IOException e) {
             Log.e(TAG, "Error fetching items JSON", e);
             return null;

@@ -69,7 +69,6 @@ public class CategoryFragmentPagerAdapter extends FragmentPagerAdapter {
                 return null;
         }
 
-
         //return CategoryFragment1.newInstance(position+1);
     }
 

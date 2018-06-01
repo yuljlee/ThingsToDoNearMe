@@ -22,22 +22,16 @@ import java.util.ArrayList;
 
 public class SyncTask {
 
-    //synchronized public static void syncMovie(Context context, String sortBy) {
-    synchronized public static void syncEvent(Context context, String sortBy) {
+    synchronized public static void syncEvent(Context context, String cat, String location) {
+
+        long epoch = System.currentTimeMillis()/1000;
+        String startTime = Long.toString(epoch);
+
         try {
 
-            //String sort = "popular";
-            //String sort = "rated";
-            //URL movieRequestUrl = NetworkUtils.buildUrl(sortBy);
-
-            //Log.v("url", );
-
-            //String jsonMovieResponse = NetworkUtils.getResponseFromHttpUrl(movieRequestUrl);
-            //String jsonMovieResponse = NetworkUtils.fetchJsonArray();
-
-            String jsonItem = NetworkUtils.fetchJsonArray(sortBy);
+            String jsonItem = NetworkUtils.fetchJsonArray(cat, location, startTime);
             if (jsonItem == null) {
-                throw new JSONException("Invalid parsed item array" );
+                throw new JSONException("Invalid parsed item array");
             }
 //
 //            /////////////////////
@@ -119,27 +113,42 @@ public class SyncTask {
 //
 //            /////////////////////
 
-
             Log.v("data:", jsonItem);
 
             ContentValues[] eventValues = JsonUtils
                     .getEventContentValuesFromJson(context, jsonItem);
 
+            String[] selecttionArgs = {cat};
+
+            ContentResolver eventContentResolver = context.getContentResolver();
+
+            eventContentResolver.delete(
+                    EventContract.EventEntry.CONTENT_URI,
+                    EventContract.EventEntry.COLUMN_CATEGORY + " = ?",
+                    selecttionArgs);
+
             if (eventValues != null && eventValues.length != 0) {
-
-                String[] selecttionArgs = {sortBy};
-
-                ContentResolver eventContentResolver = context.getContentResolver();
-
-                eventContentResolver.delete(
-                        EventContract.EventEntry.CONTENT_URI,
-                        EventContract.EventEntry.COLUMN_CATEGORY + " = ?",
-                        selecttionArgs);
 
                 eventContentResolver.bulkInsert(
                         EventContract.EventEntry.CONTENT_URI,
                         eventValues);
             }
+
+//            if (eventValues != null && eventValues.length != 0) {
+//
+//                String[] selecttionArgs = {cat};
+//
+//                ContentResolver eventContentResolver = context.getContentResolver();
+//
+//                eventContentResolver.delete(
+//                        EventContract.EventEntry.CONTENT_URI,
+//                        EventContract.EventEntry.COLUMN_CATEGORY + " = ?",
+//                        selecttionArgs);
+//
+//                eventContentResolver.bulkInsert(
+//                        EventContract.EventEntry.CONTENT_URI,
+//                        eventValues);
+//            }
 
 
         } catch (Exception e) {

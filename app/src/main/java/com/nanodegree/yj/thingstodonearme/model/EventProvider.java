@@ -197,7 +197,7 @@ public class EventProvider extends ContentProvider {
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
         int numRowsDeleted;
 
-        selection = "category = ?";
+        //selection = "category = ?";
 
         if (null == selection) selection = "1";
 

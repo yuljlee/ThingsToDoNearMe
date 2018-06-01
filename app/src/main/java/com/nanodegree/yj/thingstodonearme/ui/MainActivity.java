@@ -2,6 +2,7 @@ package com.nanodegree.yj.thingstodonearme.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
@@ -27,14 +28,17 @@ import com.nanodegree.yj.thingstodonearme.sync.SyncUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
+
+import static com.nanodegree.yj.thingstodonearme.model.Constant.DEFAULT_LOCATION;
+import static com.nanodegree.yj.thingstodonearme.model.Constant.LOCATION_KEY;
 
 public class MainActivity extends AppCompatActivity implements
         EventAdapter.EventAdapterOnClickHandler
         , LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    static final int PICK_CITY_REQUEST = 1;  // The request code
+    private static final int PICK_CITY_REQUEST = 1;  // The request code
+    private static final String CURRENT_LOCATION = "location";
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.view_pager) ViewPager mViewPager;
@@ -45,17 +49,20 @@ public class MainActivity extends AppCompatActivity implements
     private static final int EVENT_LOADER_ID = 77;
     private int mPosition = RecyclerView.NO_POSITION;
     private FragmentPagerAdapter mFragmentPagerAdapter;
+    private String mLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ButterKnife.bind(this);
+        loadPreferences();
 
         // show city name
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Los Angeles");
+        getSupportActionBar().setTitle(mLocation);
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         //ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -67,6 +74,21 @@ public class MainActivity extends AppCompatActivity implements
         // Give the TabLayout the ViewPager
         //TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    public void loadPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+        mLocation = sharedPreferences.getString(LOCATION_KEY, DEFAULT_LOCATION);
+        //Toast.makeText(this, "pref! ---> " + mSortBy, Toast.LENGTH_LONG).show();
+    }
+
+    public void savePreferences(String location) {
+        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(LOCATION_KEY, location);
+        editor.apply();
+
+        //mSortBy = sortOrder;
     }
 
     @OnClick(R.id.toolbar)
@@ -89,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements
             if (resultCode == RESULT_OK) {
                 String cityName = data.getStringExtra("city_name").toString();
                 //Toast.makeText(this, "I got it ---> " + cityName, Toast.LENGTH_LONG).show();
+                savePreferences(cityName);
                 getSupportActionBar().setTitle(cityName);
             }
         }
@@ -97,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onClickTest(View view){
          //URL url =  NetworkUtils.buildUrl();
          //NetworkUtils.fetchJsonArray();
-        SyncUtils.startImmediateSync(this, "music");
+        SyncUtils.startImmediateSync(this, "music", "San Diego, CA");
     }
 
     @Override
