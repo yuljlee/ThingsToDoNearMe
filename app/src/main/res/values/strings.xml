@@ -43,4 +43,8 @@
     </string-array>
     <string name="appwidget_text">Near me</string>
     <string name="add_widget">Add widget</string>
+    <string name="event">event</string>
+    <string name="official_site">Official Site</string>
+    <string name="category">Music</string>
+    <string name="map">Map</string>
 </resources>

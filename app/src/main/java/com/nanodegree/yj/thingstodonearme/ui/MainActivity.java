@@ -91,6 +91,12 @@ public class MainActivity extends AppCompatActivity implements
         //mSortBy = sortOrder;
     }
 
+    private void broadcastIntent() {
+        Intent intent = new Intent(this, EventAppWidget.class);
+        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE\"");
+        sendBroadcast(intent);
+    }
+
     @OnClick(R.id.toolbar)
     public void showCityList() {
         //Toast.makeText(this, "I'm in Los Angeles", Toast.LENGTH_LONG).show();
@@ -113,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements
                 //Toast.makeText(this, "I got it ---> " + cityName, Toast.LENGTH_LONG).show();
                 savePreferences(cityName);
                 getSupportActionBar().setTitle(cityName);
+                //broadcastIntent();
             }
         }
     }
@@ -125,29 +132,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(int indexId) {
-//        Context context = this;
-//        Class destinationClass = DetailActivity.class;
-//        Intent intentToStartDetailActivity = new Intent(context, destinationClass);
-//        intentToStartDetailActivity.putExtra("movie", movie);
-//        startActivity(intentToStartDetailActivity);
-
-//        Intent movieDetailIntent = new Intent(MainActivity.this, DetailActivity.class);
-//
-//        // if selected movie is not the favorite, check it exists in favorite table to set the star on or off
-//
           Toast.makeText(this, "sort -> hi", Toast.LENGTH_LONG).show();
-//        Log.d("onClick: indexId -> ", String.valueOf(indexId));
-//        Log.d("onClick: mSortBy -> ", mSortBy);
-//        Uri uriMovieClicked;
-//        if (mSortBy.equals(SORT_FAVORITE)) {
-//            uriMovieClicked = MovieContract.FavoriteMovieEntry.buildMovieUriWithId(indexId);
-//        } else {
-//            uriMovieClicked = MovieContract.MovieEntry.buildMovieUriWithId(indexId);
-//        }
-//
-//        movieDetailIntent.setData(uriMovieClicked);
-//        //startActivity(movieDetailIntent);
-//        startActivityForResult(movieDetailIntent, PICK_MOVIE_REQUEST);
     }
 
     @Override

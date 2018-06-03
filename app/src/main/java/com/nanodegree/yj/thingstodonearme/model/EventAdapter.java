@@ -32,7 +32,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
     public interface EventAdapterOnClickHandler {
         //void onLoadFinished(Loader<ArrayList<Movie>> loader, ArrayList<Movie> data);
 
-        //void onClick(Movie weatherForDay);
         void onClick(int eventId);
     }
 
@@ -63,10 +62,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
             //Movie movie = mMovieData.get(adapterPosition);
             //mClickHandler.onClick(movie);
             mCursor.moveToPosition(adapterPosition);
-            int indexId = mCursor.getInt(0); // movie id
+            int indexId = mCursor.getInt(0); // event id
             mClickHandler.onClick(indexId);
 
-            Log.v(TAG + " click ---> ", String.valueOf(indexId));
+            Log.v(TAG , " onClick called ---> " + String.valueOf(indexId));
         }
     }
 

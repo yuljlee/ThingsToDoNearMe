@@ -12,6 +12,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static android.content.ContentValues.TAG;
 import static com.nanodegree.yj.thingstodonearme.utils.CommonUtils.convertAddress;
 import static com.nanodegree.yj.thingstodonearme.utils.CommonUtils.reformatDate;
 
@@ -60,6 +62,7 @@ public class DetailActivityFragment extends Fragment implements
     String mSiteUrl;
     private static final int EVENT_DETAIL_LOADER = 10;
     private EventAdapter mEventApdapter;
+    static final String KEY_URI = "KEY_URI";
 
     private double mLatitude = 33.898580;
     private double mLogitude = -117.983674;
@@ -117,9 +120,24 @@ public class DetailActivityFragment extends Fragment implements
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mUri = getActivity().getIntent().getData();
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(KEY_URI))
+                mUri = Uri.parse(savedInstanceState.getString(KEY_URI));
+        } else {
+            mUri = getActivity().getIntent().getData();
+        }
+
+        Log.d(TAG, "uriEventClicked --> " + mUri.toString());
         if (mUri == null) throw new NullPointerException("URI for DetailActivity cannot be null");
         getActivity().getSupportLoaderManager().initLoader(EVENT_DETAIL_LOADER, null, this);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (mUri != null)
+            outState.putString(KEY_URI, mUri.toString());
     }
 
     @Override

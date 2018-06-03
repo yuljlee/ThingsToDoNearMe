@@ -134,22 +134,6 @@ public class SyncTask {
                         eventValues);
             }
 
-//            if (eventValues != null && eventValues.length != 0) {
-//
-//                String[] selecttionArgs = {cat};
-//
-//                ContentResolver eventContentResolver = context.getContentResolver();
-//
-//                eventContentResolver.delete(
-//                        EventContract.EventEntry.CONTENT_URI,
-//                        EventContract.EventEntry.COLUMN_CATEGORY + " = ?",
-//                        selecttionArgs);
-//
-//                eventContentResolver.bulkInsert(
-//                        EventContract.EventEntry.CONTENT_URI,
-//                        eventValues);
-//            }
-
 
         } catch (Exception e) {
             /* Server probably invalid */
