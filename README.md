@@ -1,3 +1,3 @@
 # ThingsToDoNearMe
 
-This is capstone project for Udacity's Android Nanodegree program.
+Source code for the Capstone Project of Udacity Android Developer Nanodegree
