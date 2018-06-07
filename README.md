@@ -9,6 +9,12 @@ Things to do near me is a mobile application to help people search for some upco
 * Display markers the event location on google map.
 * Share the event information with others.
 
+## Libraries & Services
+
+* Butterknife: To bind views for code simplicity
+* Picasso: To handle the loading and caching of images
+* Google map api to display event location
+* Google Mobile Ads when event detail screen is displayed
 
 ## Screenshots
 
