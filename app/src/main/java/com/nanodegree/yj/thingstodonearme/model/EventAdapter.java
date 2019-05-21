@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nanodegree.yj.thingstodonearme.R;
 import com.nanodegree.yj.thingstodonearme.utils.CommonUtils;
@@ -49,10 +50,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
 
         public EventAdapterViewHolder(View view) {
             super(view);
-            mMoviePoster1 = (ImageView) view.findViewById((R.id.event_imageview));
-            mEventTextView = (TextView) view.findViewById(R.id.textview);
-            mDateTextView = (TextView) view.findViewById(R.id.date_textview);
-            mLocationTextView = (TextView) view.findViewById(R.id.location_textview);
+            mMoviePoster1 = view.findViewById((R.id.event_imageview));
+            mEventTextView = view.findViewById(R.id.textview);
+            mDateTextView = view.findViewById(R.id.date_textview);
+            mLocationTextView = view.findViewById(R.id.location_textview);
 
             view.setOnClickListener(this);
         }
@@ -83,17 +84,25 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
     @Override
     public void onBindViewHolder(EventAdapter.EventAdapterViewHolder holder, int position) {
         mCursor.moveToPosition(position);
-
         Log.v("position ---> ", String.valueOf(position));
-
         String posterUrl = mCursor.getString(5);
-        //movieAdapterViewHolder.mMovieTextView.setText(mCursor.getString(1));
+        Context context = holder.mMoviePoster1.getContext();
 
+        /* if only image url is valid  */
         if (!posterUrl.equals("") && posterUrl != null) {
-            Context context = holder.mMoviePoster1.getContext();
             Picasso.with(context)
                     .load(posterUrl)
+                    .error(R.drawable.no_image)
                     .into(holder.mMoviePoster1);
+        }
+        else {
+            /* show default image */
+            Picasso.with(context)
+                    .load(R.drawable.no_image)
+                    //.resize(100, 200)
+                    .fit()
+                    .into(holder.mMoviePoster1);
+            //Log.d("posterUrl -> ", posterUrl);
         }
 
         holder.mEventTextView.setText(mCursor.getString(2)); // event name
