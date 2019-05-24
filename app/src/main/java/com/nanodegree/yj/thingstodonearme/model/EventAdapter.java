@@ -106,7 +106,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
         }
 
         holder.mEventTextView.setText(mCursor.getString(2)); // event name
-        holder.mDateTextView.setText(CommonUtils.reformatDate(mCursor.getString(6)));  // event date
+        //holder.mDateTextView.setText(CommonUtils.reformatDate(mCursor.getString(6)));  // event date
+        //holder.mDateTextView.setText(mCursor.getString(6));  // event date
+        holder.mDateTextView.setText(CommonUtils.convertDateTime(mCursor.getString(6)));  // event date
+        Log.d("start_time", mCursor.getString(6));
         holder.mLocationTextView.setText(CommonUtils.convertAddress(mCursor.getString(17))); // event location
     }
 

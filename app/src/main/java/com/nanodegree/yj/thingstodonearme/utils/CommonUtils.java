@@ -32,6 +32,27 @@ public final class CommonUtils {
         return simpleDateFormat.format(calendar.getTime());
     }
 
+    /**
+     * Convert a string with this format("YYYY-MM-DDTHH:MM:SS+HH:MM") to another format
+     * @param dateIn - The string we are to convert to a date
+     * @return - The string object that has another format: ex - Sat, Mar 24, 2018, 4:00 PM
+     */
+    public static String convertDateTime(String dateIn) throws ParseException {
+
+        String oldString = dateIn;
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(oldString);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+
+        // Sat, Mar 24, 2018, 4:00 PM
+        String newString = new SimpleDateFormat("EEE, MMM d, yyyy, h:mm a").format(date);
+
+        return  newString;
+    }
+
     public static String convertAddress(String address) {
         address = address.replace("\"", "");
         address = address.replace("[", "");

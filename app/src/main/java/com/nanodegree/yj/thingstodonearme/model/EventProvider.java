@@ -22,9 +22,7 @@ public class EventProvider extends ContentProvider {
     public static final int CODE_LOCATION = 200;
     public static final int CODE_LOCATION_WITH_ID = 201;
 
-
     private static final UriMatcher sUriMatcher = buildUriMatcher();
-
 
     private static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);

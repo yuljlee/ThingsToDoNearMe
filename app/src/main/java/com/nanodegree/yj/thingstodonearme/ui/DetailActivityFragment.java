@@ -40,6 +40,7 @@ import butterknife.Unbinder;
 
 import static android.content.ContentValues.TAG;
 import static com.nanodegree.yj.thingstodonearme.utils.CommonUtils.convertAddress;
+import static com.nanodegree.yj.thingstodonearme.utils.CommonUtils.convertDateTime;
 import static com.nanodegree.yj.thingstodonearme.utils.CommonUtils.reformatDate;
 
 /**
@@ -177,17 +178,27 @@ public class DetailActivityFragment extends Fragment implements
             return;
         }
 
-        Picasso.with(getContext())
-                .load(data.getString(INDEX_EVENT_INAGE_URL))
-                .into(mEventImage);
+        if (!data.getString(INDEX_EVENT_INAGE_URL).equals("") && data.getString(INDEX_EVENT_INAGE_URL) != null) {
+            Picasso.with(getContext())
+                    .load(data.getString(INDEX_EVENT_INAGE_URL))
+                    .into(mEventImage);
+        }
+        else {
+            /* show default image */
+            Picasso.with(getContext())
+                    .load(R.drawable.no_image)
+                    .fit()
+                    .into(mEventImage);
+        }
+
         mName.setText(data.getString(INDEX_EVENT_NAME));
         mDesc.setText(data.getString(INDEX_EVENT_DESC));
-        String eventDate = reformatDate(data.getString(INDEX_EVENT_DATE));
+        String eventDate = convertDateTime(data.getString(INDEX_EVENT_DATE));
         mDate.setText("From: " + eventDate);
         String eventDateEnd = data.getString(INDEX_EVENT_DATE_TO);
         if (eventDateEnd != null && !eventDateEnd.isEmpty() && !eventDateEnd.equals("null")) {
             //eventDateEnd = reformatDate(data.getString(INDEX_EVENT_DATE_TO));
-            mDateTo.setText("To: " + reformatDate(eventDateEnd));
+            mDateTo.setText("To: " + convertDateTime(eventDateEnd));
         }
         mLocation.setText(convertAddress(data.getString(INDEX_EVENT_LOCATION)));
         mSiteUrl = data.getString(INDEX_EVENT_SITE_URL);
