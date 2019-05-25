@@ -23,11 +23,42 @@
         android:hint="@string/label_search"
         android:completionThreshold="2"
         android:layout_margin="@dimen/fab_margin"/>
+    <!--show popular cities-->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TableRow>
+            <TextView
+                android:id="@+id/textView_city1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/popular_city1"
+                android:layout_margin="@dimen/fab_margin"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/textView_city2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/popular_city2"
+                android:layout_margin="@dimen/fab_margin"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/textView_city3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/popular_city3"
+                android:layout_margin="@dimen/fab_margin"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/textView_city4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/popular_city4"
+                android:layout_margin="@dimen/fab_margin"/>
+        </TableRow>
+    </TableLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_city"
-        android:layout_margin="@dimen/fab_margin"/>
 </LinearLayout>

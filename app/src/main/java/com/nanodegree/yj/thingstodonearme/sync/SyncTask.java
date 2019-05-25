@@ -27,6 +27,8 @@ public class SyncTask {
         long epoch = System.currentTimeMillis()/1000;
         String startTime = Long.toString(epoch);
 
+        Log.d("current_time --> ", startTime);
+
         try {
 
             String jsonItem = NetworkUtils.fetchJsonArray(cat, location, startTime);
