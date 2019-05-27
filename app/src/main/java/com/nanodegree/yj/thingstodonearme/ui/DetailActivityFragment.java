@@ -185,10 +185,10 @@ public class DetailActivityFragment extends Fragment implements
         }
         else {
             /* show default image */
-            Picasso.with(getContext())
-                    .load(R.drawable.no_image)
-                    .fit()
-                    .into(mEventImage);
+//            Picasso.with(getContext())
+//                    .load(R.drawable.no_image)
+//                    .fit()
+//                    .into(mEventImage);
         }
 
         mName.setText(data.getString(INDEX_EVENT_NAME));

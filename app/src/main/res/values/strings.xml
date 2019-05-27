@@ -9,6 +9,7 @@
     <string name="title_activity_maps"></string>
     <string name="label_search">Which city?</string>
     <string name="label_city">Choose city name...</string>
+    <string name="label_popular_city">Popular cities</string>
     <!-- popular city -->
     <string name="popular_city1">New York, NY</string>
     <string name="popular_city2">Los Angeles, CA</string>

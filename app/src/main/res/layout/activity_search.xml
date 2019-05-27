@@ -16,48 +16,41 @@
     </android.support.v7.widget.Toolbar>
 
     <AutoCompleteTextView
+        style="@style/LargeTextView"
         android:id="@+id/autoCompleteTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
         android:hint="@string/label_search"
-        android:completionThreshold="2"
-        android:layout_margin="@dimen/fab_margin"/>
+        android:completionThreshold="2"/>
+    <TextView
+        style="@style/MediumTextView"
+        android:id="@+id/pop_city_textView"
+        android:text="@string/label_popular_city" />
     <!--show popular cities-->
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TableRow>
             <TextView
+                style="@style/SmallTextView"
                 android:id="@+id/textView_city1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/popular_city1"
-                android:layout_margin="@dimen/fab_margin"/>
+                android:text="@string/popular_city1" />
         </TableRow>
         <TableRow>
             <TextView
+                style="@style/SmallTextView"
                 android:id="@+id/textView_city2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/popular_city2"
-                android:layout_margin="@dimen/fab_margin"/>
+                android:text="@string/popular_city2" />
         </TableRow>
         <TableRow>
             <TextView
+                style="@style/SmallTextView"
                 android:id="@+id/textView_city3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/popular_city3"
-                android:layout_margin="@dimen/fab_margin"/>
+                android:text="@string/popular_city3" />
         </TableRow>
         <TableRow>
             <TextView
+                style="@style/SmallTextView"
                 android:id="@+id/textView_city4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/popular_city4"
-                android:layout_margin="@dimen/fab_margin"/>
+                android:text="@string/popular_city4" />
         </TableRow>
     </TableLayout>
 

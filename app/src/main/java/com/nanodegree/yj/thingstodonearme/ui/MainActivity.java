@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements
         // show city name
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(mLocation);
+        getSupportActionBar().setTitle("around   " + mLocation);
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         //ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);

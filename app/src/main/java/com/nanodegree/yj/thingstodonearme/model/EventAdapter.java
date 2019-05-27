@@ -92,16 +92,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventAdapter
         if (!posterUrl.equals("") && posterUrl != null) {
             Picasso.with(context)
                     .load(posterUrl)
-                    .error(R.drawable.no_image)
+                    //.error(R.drawable.no_image)
                     .into(holder.mMoviePoster1);
         }
         else {
             /* show default image */
-            Picasso.with(context)
-                    .load(R.drawable.no_image)
-                    //.resize(100, 200)
-                    .fit()
-                    .into(holder.mMoviePoster1);
+//            Picasso.with(context)
+//                    .load(R.drawable.no_image)
+//                    //.resize(100, 200)
+//                    .fit()
+//                    .into(holder.mMoviePoster1);
             //Log.d("posterUrl -> ", posterUrl);
         }
 
