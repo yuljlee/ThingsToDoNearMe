@@ -53,17 +53,18 @@
         app:theme="@style/CustomActionBar">
 
         <TextView
+            android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="around   "
-            android:id="@+id/toolbar_title"
+            android:text="@string/around"
+            android:layout_marginRight="@dimen/fab_margin"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textView_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="LA"
+            android:text="@string/home"
             android:textSize="26sp" />
 
 <!--        <EditText-->

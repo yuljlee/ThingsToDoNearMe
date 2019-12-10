@@ -15,8 +15,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nanodegree.yj.thingstodonearme.R;
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.view_pager) ViewPager mViewPager;
     @BindView(R.id.sliding_tabs) TabLayout mTabLayout;
+    @BindView(R.id.textView_city) TextView mCityName;
 
     private RecyclerView mRecyclerView;
     private EventAdapter mEventApdapter;
@@ -62,7 +67,15 @@ public class MainActivity extends AppCompatActivity implements
         // show city name
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("around   " + mLocation);
+
+        // draw underline of city name
+        SpannableString content = new SpannableString(mLocation);
+        content.setSpan(new UnderlineSpan(), 0, mLocation.length(), 0);
+        //mTextView.setText(content);
+
+        //getSupportActionBar().setTitle("around   " + mLocation);
+        getSupportActionBar().setTitle("");
+        mCityName.setText(content);
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         //ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -108,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements
         startActivityForResult(intent, PICK_CITY_REQUEST);
     }
 
+    // show city name get chosen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -115,10 +129,13 @@ public class MainActivity extends AppCompatActivity implements
         if(requestCode == PICK_CITY_REQUEST)
         {
             if (resultCode == RESULT_OK) {
-                String cityName = data.getStringExtra("city_name").toString();
+                String cityName = data.getStringExtra("city_name");
                 //Toast.makeText(this, "I got it ---> " + cityName, Toast.LENGTH_LONG).show();
                 savePreferences(cityName);
-                getSupportActionBar().setTitle(cityName);
+                //getSupportActionBar().setTitle("around   " + cityName);
+                SpannableString content = new SpannableString(cityName);
+                content.setSpan(new UnderlineSpan(), 0, cityName.length(), 0);
+                mCityName.setText(content);
                 //broadcastIntent();
             }
         }

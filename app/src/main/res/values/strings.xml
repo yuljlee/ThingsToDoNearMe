@@ -55,4 +55,6 @@
     <string name="official_site">Official Site</string>
     <string name="category">Music</string>
     <string name="map">Map</string>
+    <string name="around">around</string>
+    <string name="home"><u>Los Angeles, CA</u></string>
 </resources>
