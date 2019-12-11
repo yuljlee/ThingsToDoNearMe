@@ -2,6 +2,9 @@ package com.nanodegree.yj.thingstodonearme.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -31,6 +34,9 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.textView_city3) TextView mCity3;
     @BindView(R.id.textView_city4) TextView mCity4;
 
+    private LocationManager locationManager;
+    private String provider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +46,11 @@ public class SearchActivity extends AppCompatActivity {
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        provider = locationManager.getBestProvider(criteria, false);
+
 
         final String[] us_city = getResources().getStringArray(R.array.us_city);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
@@ -66,6 +77,7 @@ public class SearchActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
     @OnClick({R.id.textView_city1, R.id.textView_city2, R.id.textView_city3, R.id.textView_city4})
