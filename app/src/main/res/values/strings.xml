@@ -6,11 +6,12 @@
     <string name="hello_blank_fragment"></string>
     <string name="title_activity_detail"></string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_maps"></string>
+    <string name="titl890e_activity_maps"></string>
     <string name="label_search">Which city?</string>
     <string name="label_city">Choose city name...</string>
     <string name="label_popular_city">Popular cities</string>
-    <!-- popular city -->
+    <string name="label_current_location">Use Current Location</string>
+    <!-- popular cities -->
     <string name="popular_city1">New York, NY</string>
     <string name="popular_city2">Los Angeles, CA</string>
     <string name="popular_city3">San Francisco, CA</string>
@@ -48,6 +49,7 @@
         <item>Milwaukee, WI</item>
         <item>Portland, OR</item>
         <item>Las Vegas, NV</item>
+        <item>London</item>
     </string-array>
     <string name="appwidget_text">Near me</string>
     <string name="add_widget">Add widget</string>

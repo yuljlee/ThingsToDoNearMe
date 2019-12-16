@@ -22,6 +22,10 @@
         android:completionThreshold="2"/>
     <TextView
         style="@style/MediumTextView"
+        android:id="@+id/current_location_textView"
+        android:text="@string/label_current_location" />
+    <TextView
+        style="@style/MediumTextView"
         android:id="@+id/pop_city_textView"
         android:text="@string/label_popular_city" />
     <!--show popular cities-->
