@@ -50,7 +50,12 @@
         <item>Milwaukee, WI</item>
         <item>Portland, OR</item>
         <item>Las Vegas, NV</item>
-        <item>Honolunu, HI</item>
+        <item>Honolulu, HI</item>
+        <item>Minneapolis, MN</item>
+        <item>Vancouver, BC</item>
+        <item>Toronto, ON</item>
+        <item>Cincinnati, OH</item>
+        <item>Atlanta, GA</item>
     </string-array>
     <string name="appwidget_text">Near me</string>
     <string name="add_widget">Add widget</string>
