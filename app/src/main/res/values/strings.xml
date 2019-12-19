@@ -17,7 +17,7 @@
     <string name="popular_city2">Los Angeles, CA</string>
     <string name="popular_city3">San Francisco, CA</string>
     <string name="popular_city4">San Diego, CA</string>
-    <string name="popular_city5">San Jose, CA</string>
+    <string name="popular_city5">Chicago, IL</string>
     <!-- US cities -->
     <string-array name="us_city">
         <item>New York, NY</item>
