@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidStudioProjects-ThingsToDoNearMe.iml" filepath="$PROJECT_DIR$/AndroidStudioProjects-ThingsToDoNearMe.iml" group="ThingsToDoNearMe" />
+      <module fileurl="file://$PROJECT_DIR$/app/AndroidStudioProjects-ThingsToDoNearMe-app.iml" filepath="$PROJECT_DIR$/app/AndroidStudioProjects-ThingsToDoNearMe-app.iml" group="ThingsToDoNearMe/app" />
+      <module fileurl="file://$PROJECT_DIR$/lib/AndroidStudioProjects-ThingsToDoNearMe-lib.iml" filepath="$PROJECT_DIR$/lib/AndroidStudioProjects-ThingsToDoNearMe-lib.iml" group="ThingsToDoNearMe/lib" />
       <module fileurl="file://$PROJECT_DIR$/ThingsToDoNearMe.iml" filepath="$PROJECT_DIR$/ThingsToDoNearMe.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/ThingsToDoNearMe-app.iml" filepath="$PROJECT_DIR$/app/ThingsToDoNearMe-app.iml" group="ThingsToDoNearMe/app" />
       <module fileurl="file://$PROJECT_DIR$/lib/ThingsToDoNearMe-lib.iml" filepath="$PROJECT_DIR$/lib/ThingsToDoNearMe-lib.iml" group="ThingsToDoNearMe/lib" />
@@ -11,6 +13,7 @@
       <module fileurl="file://$PROJECT_DIR$/lib/ThingsToDoNearMe.git-lib.iml" filepath="$PROJECT_DIR$/lib/ThingsToDoNearMe.git-lib.iml" group="ThingsToDoNearMe.git/lib" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib/lib.iml" filepath="$PROJECT_DIR$/lib/lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-AndroidStudioProjects-ThingsToDoNearMe.iml" filepath="$PROJECT_DIR$/user-AndroidStudioProjects-ThingsToDoNearMe.iml" group="ThingsToDoNearMe" />
     </modules>
   </component>
 </project>
