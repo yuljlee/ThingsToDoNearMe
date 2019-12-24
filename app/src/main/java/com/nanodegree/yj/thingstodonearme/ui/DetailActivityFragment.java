@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -18,18 +19,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.maps.model.LatLng;
 import com.nanodegree.yj.thingstodonearme.R;
+import com.nanodegree.yj.thingstodonearme.model.Event;
 import com.nanodegree.yj.thingstodonearme.model.EventAdapter;
 import com.nanodegree.yj.thingstodonearme.model.EventContract;
+import com.nanodegree.yj.thingstodonearme.model.Location;
 import com.nanodegree.yj.thingstodonearme.utils.CommonUtils;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -99,7 +105,16 @@ public class DetailActivityFragment extends Fragment implements
         Intent intent = new Intent(context, destinationClass);
         //Uri uriMovieClicked = EventContract.EventEntry.buildEventUriWithId(eventId);
         //intentToStartDetailActivity.setData(uriMovieClicked);
-        intent.putExtra("event_location", mLatLng);
+        //intent.putExtra("event_location", mLatLng);
+        //intent.putExtra("event_name", mName);
+//
+//        Location location = new Location("", "", ""
+//                , "", "", "", "", "", "");
+        Event event = new Event("", mName.getText().toString(), "", ""
+                , "", "", "", mLatLng[0]
+                , mLatLng[1]);
+
+        intent.putExtra("event_location", event);
 
         startActivity(intent);
     }
@@ -110,9 +125,19 @@ public class DetailActivityFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
         unbinder = ButterKnife.bind(this, view);
 
+        // app ID: ca-app-pub-3758374493617030~3294654047
+        // ad unit ID: ca-app-pub-3758374493617030/9269869600
         MobileAds.initialize(getActivity(), "ca-app-pub-3940256099942544~3347511713");
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+//
+//        mAdView.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdOpened() {
+//                super.onAdOpened();
+//                Toast.makeText(getActivity(), "Ad opened.", Toast.LENGTH_LONG).show();
+//            }
+//        });
 
         return view;
     }

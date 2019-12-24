@@ -12,8 +12,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.nanodegree.yj.thingstodonearme.R;
+import com.nanodegree.yj.thingstodonearme.model.Event;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -33,6 +35,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
     @Override
@@ -50,14 +53,34 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         //mMap.setMinZoomPreference(15);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         Intent intent = getIntent();
-        double[] location = intent.getDoubleArrayExtra("event_location");
+        //double[] location = intent.getDoubleArrayExtra("event_location");
 
         // Add a marker at the place and move the camera
-        LatLng place = new LatLng(location[0], location[1]);
+        //LatLng place = new LatLng(location[0], location[1]);
         //LatLng sydney = new LatLng(37.8114102, -122.2665892);
+
+        Event event = intent.getParcelableExtra("event_location");
+
+        LatLng place = new LatLng(event.getLatitude(), event.getLongitude());
+        final String eventName = event.getName();
+
         mMap.addMarker(new MarkerOptions().position(place).title(""));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place, 12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place, 14));
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+
+                marker.setTitle(eventName);
+                marker.showInfoWindow();
+
+
+
+                return false;
+            }
+        });
     }
 }

@@ -20,11 +20,11 @@ public class Event implements Parcelable {
     private String time_end;
     private double latitude;
     private double longitude;
-    private ArrayList<Location> location;
+    //private ArrayList<Location> location;
 
     public Event (String event_id, String name, String description, String event_site_url
-            , String image_url, String time_start, String time_end, long latitude, long longitude
-            , ArrayList<Location> location) {
+            , String image_url, String time_start, String time_end, double latitude, double longitude
+            /*, ArrayList<Location> location*/) {
         this.event_id = event_id;
         this.name = name;
         this.description = description;
@@ -34,7 +34,7 @@ public class Event implements Parcelable {
         this.time_end = time_end;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.location = location;
+        //this.location = location;
     }
 
     private Event (Parcel in) {
@@ -45,14 +45,14 @@ public class Event implements Parcelable {
         image_url = in.readString();
         time_start = in.readString();
         time_end = in.readString();
-        latitude = in.readLong();
-        longitude = in.readLong();
-        if (in.readByte() == 0x01) {
-            location = new ArrayList<Location>();
-            in.readList(location, com.nanodegree.yj.thingstodonearme.model.Location.class.getClassLoader());
-        } else {
-            location = null;
-        }
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+//        if (in.readByte() == 0x01) {
+//            location = new ArrayList<Location>();
+//            in.readList(location, com.nanodegree.yj.thingstodonearme.model.Location.class.getClassLoader());
+//        } else {
+//            location = null;
+//        }
     }
 
     @Override
@@ -66,13 +66,12 @@ public class Event implements Parcelable {
         dest.writeString(time_start);
         dest.writeDouble(latitude);
         dest.writeDouble(longitude);
-        if (location == null) {
-            dest.writeByte((byte) (0x00));
-        } else {
-
-            dest.writeByte((byte) (0x01));
-            dest.writeList(location);
-        }
+//        if (location == null) {
+//            dest.writeByte((byte) (0x00));
+//        } else {
+//            dest.writeByte((byte) (0x01));
+//            dest.writeList(location);
+//        }
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -126,7 +125,7 @@ public class Event implements Parcelable {
         return longitude;
     }
 
-    public ArrayList<Location> getLocation() {
-        return location;
-    }
+//    public ArrayList<Location> getLocation() {
+//        return location;
+//    }
 }

@@ -167,8 +167,8 @@ public final class JsonUtils {
         String image_url;
         String time_start;
         String time_end;
-        long latitude;
-        long longitude;
+        double latitude;
+        double longitude;
 
         //ArrayList<Movie> movies = new ArrayList<>();
 

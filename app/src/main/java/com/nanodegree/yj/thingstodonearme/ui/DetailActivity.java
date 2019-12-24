@@ -24,7 +24,6 @@ public class DetailActivity extends AppCompatActivity {
 //
 //        // show a back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         //toolbar.getBackground().setAlpha(0);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -35,8 +34,6 @@ public class DetailActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 //            }
 //        });
-
-
     }
 
     @Override
