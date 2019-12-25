@@ -1,16 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-
     signingConfigs {
         release {
-            keyAlias 'release.keystore'
-            keyPassword '123456'
-            storeFile file('keystore/release.keystore')
-            storePassword '123456'
+            storeFile file('C:\\Users\\user\\AndroidStudioProjects\\ThingsToDoNearMe\\app\\chris.store.jks')
+            storePassword '121399'
+            keyAlias = 'anotherWorld'
+            keyPassword '121399'
         }
     }
+    compileSdkVersion 28
+
     defaultConfig {
         applicationId "com.nanodegree.yj.thingstodonearme"
         minSdkVersion 16
