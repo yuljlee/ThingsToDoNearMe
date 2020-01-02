@@ -125,9 +125,9 @@ public class DetailActivityFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-//        MobileAds.initialize(getActivity(), "ca-app-pub-3940256099942544~3347511713");
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        mAdView.loadAd(adRequest);
+        MobileAds.initialize(getActivity(), "ca-app-pub-3940256099942544~3347511713");
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 //
 //        mAdView.setAdListener(new AdListener() {
 //            @Override
