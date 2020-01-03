@@ -46,9 +46,6 @@ public class SearchActivity extends AppCompatActivity {
 
     @BindView(R.id.current_location_textView) TextView mCurrentLocation;
 
-    private LocationManager locationManager;
-    private String provider;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +56,9 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
-        provider = locationManager.getBestProvider(criteria, false);
-
+        String provider = locationManager.getBestProvider(criteria, false);
 
         final String[] us_city = getResources().getStringArray(R.array.us_city);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,

@@ -39,18 +39,18 @@ public final class CommonUtils {
      */
     public static String convertDateTime(String dateIn) throws ParseException {
 
-        String oldString = dateIn;
+        String dateOut = dateIn;
         Date date = null;
         try {
-            date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(oldString);
+            date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(dateOut);
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
 
         // Sat, Mar 24, 2018, 4:00 PM
-        String newString = new SimpleDateFormat("EEE, MMM d, yyyy, h:mm a").format(date);
+        dateOut = new SimpleDateFormat("EEE, MMM d, yyyy, h:mm a").format(date);
 
-        return  newString;
+        return  dateOut;
     }
 
     public static String convertAddress(String address) {
