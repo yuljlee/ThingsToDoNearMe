@@ -4,15 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Parcelable;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,22 +13,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nanodegree.yj.thingstodonearme.R;
 import com.nanodegree.yj.thingstodonearme.model.Event;
 import com.nanodegree.yj.thingstodonearme.model.EventAdapter;
-import com.nanodegree.yj.thingstodonearme.model.EventContract;
-import com.nanodegree.yj.thingstodonearme.model.Location;
-import com.nanodegree.yj.thingstodonearme.utils.CommonUtils;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -47,7 +40,6 @@ import butterknife.Unbinder;
 import static android.content.ContentValues.TAG;
 import static com.nanodegree.yj.thingstodonearme.utils.CommonUtils.convertAddress;
 import static com.nanodegree.yj.thingstodonearme.utils.CommonUtils.convertDateTime;
-import static com.nanodegree.yj.thingstodonearme.utils.CommonUtils.reformatDate;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -125,17 +117,23 @@ public class DetailActivityFragment extends Fragment implements
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        MobileAds.initialize(getActivity(), "ca-app-pub-3940256099942544~3347511713");
+        MobileAds.initialize(getActivity(), getString(R.string.admob_app_id));
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-//
-//        mAdView.setAdListener(new AdListener() {
-//            @Override
-//            public void onAdOpened() {
-//                super.onAdOpened();
-//                Toast.makeText(getActivity(), "Ad opened.", Toast.LENGTH_LONG).show();
-//            }
-//        });
+
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                super.onAdOpened();
+                //Toast.makeText(getActivity(), "Ad opened.", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+                //Toast.makeText(getActivity(), "What happened?", Toast.LENGTH_LONG).show();
+            }
+        });
 
         return view;
     }

@@ -43,7 +43,7 @@
         <!--app:theme="@style/CustomActionBar">-->
     <!--</android.support.v7.widget.Toolbar>-->
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
 
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -74,9 +74,9 @@
 <!--            android:text="Los Angeles, CA"-->
 <!--            android:textSize="20sp" />-->
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
         app:tabIndicatorColor="#ffffff"
         app:tabMode="scrollable" />
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

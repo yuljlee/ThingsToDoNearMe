@@ -2,7 +2,7 @@ package com.nanodegree.yj.thingstodonearme.sync;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Created by u2stay1915 on 3/10/18.

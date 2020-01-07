@@ -1,9 +1,9 @@
 package com.nanodegree.yj.thingstodonearme.model;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.nanodegree.yj.thingstodonearme.ui.CategoryFragment1;
 import com.nanodegree.yj.thingstodonearme.ui.CategoryFragment10;

@@ -1,15 +1,11 @@
 package com.nanodegree.yj.thingstodonearme.ui;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
 
-import com.google.android.gms.ads.MobileAds;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import android.view.MenuItem;
+
 import com.nanodegree.yj.thingstodonearme.R;
 
 public class DetailActivity extends AppCompatActivity {
